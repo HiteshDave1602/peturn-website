@@ -26,11 +26,19 @@ export const services = [
   { title: "Executive Reporting", text: "Executive-ready reports highlighting KPIs, trends, risks, and actionable recommendations.", tags: ["Leadership-ready", "Decision support"] },
 ] as const;
 
+type PricingPlan = {
+  readonly name: string;
+  readonly description: string;
+  readonly price: string;
+  readonly items: readonly string[];
+  readonly featured: boolean;
+};
+
 export const pricing = [
-  { name: "Starter", description: "Perfect for small businesses beginning their analytics journey.", price: "Starting from ₹9,999/month", items: ["Dashboard setup", "Monthly reporting", "Business insights", "Email support"] },
+  { name: "Starter", description: "Perfect for small businesses beginning their analytics journey.", price: "Starting from ₹9,999/month", items: ["Dashboard setup", "Monthly reporting", "Business insights", "Email support"], featured: false },
   { name: "Growth", description: "Designed for businesses requiring advanced analytics and deeper reporting.", price: "Starting from ₹14,999/month", items: ["Multiple dashboards", "Executive reports", "Performance tracking", "Priority support"], featured: true },
-  { name: "Enterprise", description: "Customized Business Intelligence solutions for medium and large organizations.", price: "Custom pricing based on project scope", items: ["Tailored data model", "Custom integrations", "Advanced reporting", "Ongoing support"] },
-] as const;
+  { name: "Enterprise", description: "Customized Business Intelligence solutions for medium and large organizations.", price: "Custom pricing based on project scope", items: ["Tailored data model", "Custom integrations", "Advanced reporting", "Ongoing support"], featured: false },
+] as const satisfies readonly PricingPlan[];
 
 export const faqs = [
   ["What data sources do you support?", "Excel, CSV, ERP systems, POS systems, accounting software, databases, and other business applications."],
