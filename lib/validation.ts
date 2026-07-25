@@ -12,8 +12,8 @@ export const contactSchema = z.object({
   service: z.enum(["Business Intelligence Consulting", "Dashboard Development", "Sales Analytics", "Inventory Analytics", "Procurement Analytics", "Profitability Analysis", "Executive Reporting", "Other"]),
   preferredContact: z.enum(["Email", "Phone", "WhatsApp"]),
   message: clean(2000),
-  consent: z.literal(true, { error: "Please confirm your consent" }),
-  website: z.string().max(0, "Spam detected").optional().default(""),
-  source: z.string().max(200).optional().default("Website contact form"),
+  consent: z.boolean().refine((val) => val === true, { error: "Please confirm your consent" }),
+  website: z.string().max(0, "Spam detected"),
+  source: z.string().max(200),
 });
 export type ContactInput = z.infer<typeof contactSchema>;
