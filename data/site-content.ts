@@ -10,11 +10,11 @@ export const contact = {
 } as const;
 
 export const navigation = [
-  { label: "Home", href: "#home" },
-  { label: "About Company", href: "#about" },
-  { label: "Services", href: "#services" },
-  { label: "Why Us", href: "#why-us" },
-  { label: "Contact Us", href: "#contact" },
+  { label: "Home", href: "/" },
+  { label: "About Company", href: "/about" },
+  { label: "Services", href: "/services" },
+  { label: "Why Us", href: "/why-us" },
+  { label: "Contact Us", href: "/contact" },
 ] as const;
 
 export const services = [

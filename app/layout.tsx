@@ -1,5 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Poppins, IBM_Plex_Mono } from "next/font/google";
+import { Footer } from "@/components/Footer";
+import { Header } from "@/components/Header";
+import { WhatsAppChooser } from "@/components/Interactive";
+import { contact } from "@/data/site-content";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
@@ -18,5 +22,10 @@ export const metadata: Metadata = {
 export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#061433" };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en"><body className={`${inter.variable} ${poppins.variable} ${mono.variable}`}>{children}</body></html>;
+  const structuredData = [
+    { "@context": "https://schema.org", "@type": "Organization", name: "Peturn", url: "https://www.peturn.in", email: contact.email, logo: "https://www.peturn.in/brand/peturn-logo.png", contactPoint: [{ "@type": "ContactPoint", telephone: contact.indiaPhone, contactType: "sales", areaServed: "IN" }, { "@type": "ContactPoint", telephone: contact.usPhone, contactType: "sales", areaServed: "US" }] },
+    { "@context": "https://schema.org", "@type": "ProfessionalService", name: "Peturn", url: "https://www.peturn.in", email: contact.email, description: "Business Intelligence and Analytics consulting for retail and manufacturing businesses.", areaServed: ["India", "United States"] }
+  ];
+
+  return <html lang="en"><body className={`${inter.variable} ${poppins.variable} ${mono.variable}`}><Header />{children}<Footer/><WhatsAppChooser/><script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(structuredData)}}/></body></html>;
 }
