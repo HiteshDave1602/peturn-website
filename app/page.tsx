@@ -1,5 +1,10 @@
+import type { Metadata } from "next";
+import { JsonLd } from "@/components/JsonLd";
 import ScrollReveal from "@/components/ScrollReveal";
-import { HeroSection, ProblemsSection, SampleDashboardsSection } from "@/components/PageSections";
+import { HeroSection, ProblemsSection, SampleDashboardsSection, IndustriesSection, ProcessSection } from "@/components/PageSections";
+import { buildBreadcrumbJsonLd, buildPageJsonLd, createMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = createMetadata("/");
 
 export default function Home() {
   return <>
@@ -8,6 +13,10 @@ export default function Home() {
       <HeroSection />
       <ProblemsSection />
       <SampleDashboardsSection />
+      <IndustriesSection />
+      <ProcessSection />
     </main>
+    <JsonLd data={buildPageJsonLd("/")} />
+    <JsonLd data={buildBreadcrumbJsonLd("/")} />
   </>;
 }

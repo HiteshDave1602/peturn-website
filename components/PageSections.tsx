@@ -1,4 +1,4 @@
-import { BarChart3, Boxes, Building2, ChartNoAxesCombined, Check, CircleDollarSign, ClipboardCheck, Database, FileSpreadsheet, Gauge, Lightbulb, LockKeyhole, Mail, Map, PackageSearch, Phone, RefreshCw, Settings2, ShieldCheck, ShoppingBasket, Target, TrendingUp, Users, WalletCards } from "lucide-react";
+import { BarChart3, Building2, Check, ChartNoAxesCombined, CircleDollarSign, ClipboardCheck, Database, FileSpreadsheet, Gauge, Lightbulb, LockKeyhole, Mail, Map, PackageSearch, Phone, RefreshCw, Settings2, ShieldCheck, ShoppingBasket, Target, TrendingUp, Users, WalletCards } from "lucide-react";
 import { ContactForm } from "@/components/ContactForm";
 import { MiniDashboard } from "@/components/Dashboard";
 import { DashboardCTA, FAQList } from "@/components/Interactive";
@@ -6,7 +6,7 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { contact, pricing, services } from "@/data/site-content";
 
 const problemIcons = [FileSpreadsheet, RefreshCw, Database, Gauge];
-const serviceIcons = [Database, BarChart3, TrendingUp, PackageSearch, Boxes, CircleDollarSign, ClipboardCheck];
+const serviceIcons = [Database, BarChart3, TrendingUp, PackageSearch, Building2, CircleDollarSign, ClipboardCheck];
 const process = [
   ["Business Discovery", "We understand your business, challenges, goals, and reporting requirements."],
   ["Data Collection", "We collect data from Excel, ERP systems, accounting software, POS systems, databases, and other business applications."],
@@ -45,7 +45,7 @@ export function HeroSection() {
 export function AboutSection() {
   return <section id="about" className="section">
     <div className="container about-grid"><div><p className="eyebrow">Built for better decisions</p><h2>About Peturn</h2><div className="about-copy"><p>Peturn is a Business Intelligence and Analytics consulting company focused on helping businesses unlock the true value of their data.</p><p>Many organizations rely on spreadsheets, manual reports, and disconnected systems that make decision-making slow and inefficient. At Peturn, we transform business data into interactive dashboards and actionable insights that help leaders make confident, data-driven decisions.</p><p>Whether you are a growing retail business or a manufacturing company, our solutions provide clear visibility into your operations, enabling you to improve performance, reduce costs, and drive sustainable growth.</p></div></div>
-      <div className="about-visual" aria-label="Abstract business analytics visualization"><div className="data-map"><span>Business data</span><Database/><i/><i/><i/><div className="insight-card"><ChartNoAxesCombined/><b>Clear insight</b><small>Built around your goals</small></div></div></div>
+      <div className="about-visual image-visual"><img src="/images/02-about-company.jpg" alt="Peturn analytics consultation" /></div>
       <article className="mission-card"><Map/><h3>Our Mission</h3><p>To empower businesses with simple, reliable, and affordable Business Intelligence solutions that transform raw data into meaningful insights.</p></article>
       <article className="mission-card"><Target/><h3>Our Vision</h3><p>To become one of India’s most trusted Business Intelligence consulting companies, helping organizations make smarter decisions through data and innovation.</p></article>
     </div>
