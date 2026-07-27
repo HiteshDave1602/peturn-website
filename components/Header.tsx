@@ -19,12 +19,12 @@ export function Header() {
     <div className="container nav-wrap">
       <a href="/" className="logo" aria-label="Peturn home"><Image src="/brand/peturn-logo.png" alt="Peturn — Turn Data Into Growth" width={340} height={138} priority /></a>
       <nav className="desktop-nav" aria-label="Main navigation">{navigation.map(item => <a className={pathname === item.href ? "active" : ""} key={item.href} href={item.href}>{item.label}</a>)}</nav>
-      <a className="button nav-cta" href="/contact">Book a Free Consultation</a>
+      <a className="button nav-cta" href="/contact#start-conversation">Book a Free Consultation</a>
       <button className="menu-button" onClick={() => setOpen(!open)} aria-expanded={open} aria-controls="mobile-menu" aria-label={open ? "Close menu" : "Open menu"}>{open ? <X /> : <Menu />}</button>
     </div>
     <nav id="mobile-menu" className={`mobile-nav ${open ? "open" : ""}`} aria-label="Mobile navigation">
       {navigation.map(item => <a key={item.href} href={item.href} onClick={() => setOpen(false)}>{item.label}</a>)}
-      <a className="button" href="/contact" onClick={() => setOpen(false)}>Book a Free Consultation</a>
+      <a className="button" href="/contact#start-conversation" onClick={() => setOpen(false)}>Book a Free Consultation</a>
     </nav>
   </header>;
 }

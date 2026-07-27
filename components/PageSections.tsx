@@ -35,7 +35,7 @@ export function HeroSection() {
         <h1>Transform Your Business Data into <span>Smarter Decisions</span></h1>
         <p className="lead">We help businesses turn scattered data into meaningful insights through Business Intelligence, interactive dashboards, and analytics solutions that improve profitability, efficiency, and decision-making.</p>
         <p className="hero-statement">Data-Driven Decisions. Measurable Growth. Smarter Business.</p>
-        <div className="actions"><a className="button" href="/contact">Book a Free Consultation</a><a className="button secondary" href="#sample-dashboards">View Sample Dashboard</a></div>
+        <div className="actions"><a className="button" href="/contact#start-conversation">Book a Free Consultation</a><a className="button secondary" href="#sample-dashboards">View Sample Dashboard</a></div>
         <div className="trust-row"><span><ShieldCheck/> Confidential by design</span><span><Settings2/> Built around your business</span></div>
       </div>
     </div>
@@ -110,7 +110,7 @@ export function WhyUsSection() {
 export function PricingSection() {
   return <section id="pricing" className="section pricing-section">
     <div className="container"><SectionHeading eyebrow="Flexible ways to begin" title="Analytics Solutions for Every Stage of Growth"/>
-      <div className="pricing-grid">{pricing.map(plan=><article className={plan.featured ? "featured" : ""} key={plan.name}>{plan.featured&&<span className="popular">Recommended</span>}<h3>{plan.name}</h3><p>{plan.description}</p><strong className="price">{plan.price}</strong><ul>{plan.items.map(x=><li key={x}><Check/>{x}</li>)}</ul><a href="/contact" className={`button ${plan.featured?"":"secondary"}`}>Book a Consultation</a></article>)}</div>
+      <div className="pricing-grid">{pricing.map(plan=><article className={plan.featured ? "featured" : ""} key={plan.name}>{plan.featured&&<span className="popular">Recommended</span>}<h3>{plan.name}</h3><p>{plan.description}</p><strong className="price">{plan.price}</strong><ul>{plan.items.map(x=><li key={x}><Check/>{x}</li>)}</ul><a href="/contact#start-conversation" className={`button ${plan.featured?"":"secondary"}`}>Book a Consultation</a></article>)}</div>
       <p className="pricing-note">Final pricing depends on data sources, dashboard complexity, reporting frequency, integrations, and project scope.</p>
     </div>
   </section>;
@@ -123,7 +123,7 @@ export function FAQSection() {
 }
 
 export function ContactSection() {
-  return <section id="contact" className="section contact-section">
+  return <section id="start-conversation" className="section contact-section">
     <div className="container contact-grid"><div className="contact-copy"><p className="eyebrow">Start a conversation</p><h2>Ready to Transform Your Business with Data?</h2><p className="lead">Let’s build smarter decisions together.</p><h3>Book Your Free Business Consultation Today</h3>
       <div className="contact-links"><a href={`mailto:${contact.email}`}><Mail/><span><small>Email</small>{contact.email}</span></a><a href={`tel:${contact.indiaTel}`}><Phone/><span><small>India phone &amp; WhatsApp</small>{contact.indiaPhone}</span></a><a href={`tel:${contact.usTel}`}><Phone/><span><small>United States phone &amp; WhatsApp</small>{contact.usPhone}</span></a></div>
       <div className="privacy-note"><ShieldCheck/><p><strong>Your business information stays confidential.</strong><br/>We use your details only to respond to your inquiry.</p></div>

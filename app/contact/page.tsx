@@ -11,8 +11,8 @@ export default function ContactPage() {
     <ScrollReveal />
     <main id="main">
       <h1 className="sr-only">Contact Peturn for a Free Business Intelligence Consultation</h1>
-      <ContactSection />
       <FAQSection />
+      <ContactSection />
     </main>
     <JsonLd data={buildPageJsonLd("/contact")} />
     <JsonLd data={buildBreadcrumbJsonLd("/contact")} />
