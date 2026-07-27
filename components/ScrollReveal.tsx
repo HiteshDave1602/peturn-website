@@ -3,7 +3,7 @@ import { useEffect } from "react";
 
 export default function ScrollReveal() {
   useEffect(() => {
-    const sections = document.querySelectorAll("#main > section");
+    const sections = document.querySelectorAll("#main > section:not(#why-us)");
     sections.forEach((el) => el.classList.add("reveal-section"));
 
     const observer = new IntersectionObserver(

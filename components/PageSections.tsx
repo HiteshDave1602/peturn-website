@@ -1,8 +1,9 @@
 import { BarChart3, Building2, Check, ChartNoAxesCombined, CircleDollarSign, ClipboardCheck, Database, FileSpreadsheet, Gauge, Lightbulb, LockKeyhole, Mail, Map, PackageSearch, Phone, RefreshCw, Settings2, ShieldCheck, ShoppingBasket, Target, TrendingUp, Users, WalletCards } from "lucide-react";
 import { ContactForm } from "@/components/ContactForm";
 import { MiniDashboard } from "@/components/Dashboard";
-import { DashboardCTA, FAQList } from "@/components/Interactive";
+import { DashboardCTA, FAQList, WhatsAppOpenButton } from "@/components/Interactive";
 import { SectionHeading } from "@/components/SectionHeading";
+import { AutoCarousel } from "@/components/AutoCarousel";
 import { contact, pricing, services } from "@/data/site-content";
 
 const problemIcons = [FileSpreadsheet, RefreshCw, Database, Gauge];
@@ -46,8 +47,10 @@ export function AboutSection() {
   return <section id="about" className="section">
     <div className="container about-grid"><div><p className="eyebrow">Built for better decisions</p><h2>About Peturn</h2><div className="about-copy"><p>Peturn is a Business Intelligence and Analytics consulting company focused on helping businesses unlock the true value of their data.</p><p>Many organizations rely on spreadsheets, manual reports, and disconnected systems that make decision-making slow and inefficient. At Peturn, we transform business data into interactive dashboards and actionable insights that help leaders make confident, data-driven decisions.</p><p>Whether you are a growing retail business or a manufacturing company, our solutions provide clear visibility into your operations, enabling you to improve performance, reduce costs, and drive sustainable growth.</p></div></div>
       <div className="about-visual image-visual"><img src="/images/02-about-company.jpg" alt="Peturn analytics consultation" /></div>
-      <article className="mission-card"><Map/><h3>Our Mission</h3><p>To empower businesses with simple, reliable, and affordable Business Intelligence solutions that transform raw data into meaningful insights.</p></article>
-      <article className="mission-card"><Target/><h3>Our Vision</h3><p>To become one of India’s most trusted Business Intelligence consulting companies, helping organizations make smarter decisions through data and innovation.</p></article>
+      <div className="mission-grid">
+        <article id="mission-slide-1" className="mission-card"><Map/><h3>Our Mission</h3><p>To empower businesses with simple, reliable, and affordable Business Intelligence solutions that transform raw data into meaningful insights.</p></article>
+        <article id="mission-slide-2" className="mission-card"><Target/><h3>Our Vision</h3><p>To become one of India’s most trusted Business Intelligence consulting companies, helping organizations make smarter decisions through data and innovation.</p></article>
+      </div>
     </div>
   </section>;
 }
@@ -56,7 +59,7 @@ export function ProblemsSection() {
   return <section className="problems">
     <div className="container">
       <SectionHeading eyebrow="From complexity to clarity" title="Your Business Has Data. The Challenge Is Turning It into Direction." />
-      <div className="four-grid">{["Scattered spreadsheets","Manual reporting","Disconnected systems","Slow decision-making"].map((x,i) => { const Icon=problemIcons[i]; return <article className="problem-card" key={x}><Icon/><h3>{x}</h3><p>{["Different versions make one reliable view difficult.","Repetitive report preparation consumes valuable time.","Key information stays isolated across business tools.","Late information delays confident action."][i]}</p></article>; })}</div>
+      <div className="four-grid">{["Scattered spreadsheets","Manual reporting","Disconnected systems","Slow decision-making"].map((x,i) => { const Icon=problemIcons[i]; return <article id={`problem-slide-${i+1}`} className="problem-card" key={x}><Icon/><h3>{x}</h3><p>{["Different versions make one reliable view difficult.","Repetitive report preparation consumes valuable time.","Key information stays isolated across business tools.","Late information delays confident action."][i]}</p></article>; })}</div>
       <p className="solution-line"><span>Peturn transforms</span> disconnected business information into clear dashboards, reliable reporting, and actionable insights.</p>
     </div>
   </section>;
@@ -65,7 +68,9 @@ export function ProblemsSection() {
 export function ServicesSection() {
   return <section id="services" className="section">
     <div className="container"><SectionHeading eyebrow="What we help you see" title="Business Intelligence Solutions Built Around Your Business" text="From sales and inventory to procurement and profitability, Peturn helps you see what is happening, understand why it is happening, and decide what to do next."/>
-      <div className="services-grid">{services.map((item,i) => { const Icon=serviceIcons[i]; return <article className="service-card" tabIndex={0} key={item.title}><div className="icon-box"><Icon/></div><h3>{item.title}</h3><p>{item.text}</p><div className="tags">{item.tags.map(t=><span key={t}>{t}</span>)}</div></article>; })}</div>
+      <div className="services-radial" aria-label="Peturn services">
+        {services.map((item,i) => { const Icon=serviceIcons[i]; return <article className="service-orb" tabIndex={0} key={item.title}><div className="service-orb-icon"><Icon/></div><h3>{item.title}</h3><p>{item.text}</p><div className="tags">{item.tags.map(t=><span key={t}>{t}</span>)}</div></article>; })}
+      </div>
     </div>
   </section>;
 }
@@ -83,8 +88,8 @@ export function IndustriesSection() {
   return <section id="industries" className="section">
     <div className="container"><SectionHeading eyebrow="Industry context matters" title="Analytics Designed for Your Industry" text="Dashboards shaped around the operating rhythms, questions and decisions in your business."/>
       <div className="industries-grid">
-        <article className="industry-card"><div className="industry-visual retail" aria-hidden="true"></div><div><span className="industry-label"><ShoppingBasket/> Retail businesses</span><h3>See every store, shelf and sale in context.</h3><p>Connect sales, stock and margin visibility so teams can respond with confidence.</p><div className="chips">{["Supermarkets","Liquor Stores","Grocery Stores","Department Stores","Electronics Retailers","Pharmacy Stores","Fashion Retail"].map(x=><span key={x}>{x}</span>)}</div></div></article>
-        <article className="industry-card"><div className="industry-visual manufacturing" aria-hidden="true"></div><div><span className="industry-label"><Building2/> Manufacturing companies</span><h3>Bring production, cost and supply data together.</h3><p>Track operational signals across procurement, inventory and profitability.</p><div className="chips">{["FMCG","Plastic Manufacturing","Packaging","Textile","Cosmetics","Consumer Products"].map(x=><span key={x}>{x}</span>)}</div></div></article>
+        <article id="industry-slide-1" className="industry-card"><div className="industry-visual retail" aria-hidden="true"></div><div><span className="industry-label"><ShoppingBasket/> Retail businesses</span><h3>See every store, shelf and sale in context.</h3><p>Connect sales, stock and margin visibility so teams can respond with confidence.</p><div className="chips">{["Supermarkets","Liquor Stores","Grocery Stores","Department Stores","Electronics Retailers","Pharmacy Stores","Fashion Retail"].map(x=><span key={x}>{x}</span>)}</div></div></article>
+        <article id="industry-slide-2" className="industry-card"><div className="industry-visual manufacturing" aria-hidden="true"></div><div><span className="industry-label"><Building2/> Manufacturing companies</span><h3>Bring production, cost and supply data together.</h3><p>Track operational signals across procurement, inventory and profitability.</p><div className="chips">{["FMCG","Plastic Manufacturing","Packaging","Textile","Cosmetics","Consumer Products"].map(x=><span key={x}>{x}</span>)}</div></div></article>
       </div>
     </div>
   </section>;
@@ -93,7 +98,7 @@ export function IndustriesSection() {
 export function ProcessSection() {
   return <section id="process" className="section process-section">
     <div className="container"><SectionHeading eyebrow="How we work" title="A Clear Process from Raw Data to Better Decisions"/>
-      <div className="timeline">{process.map(([title,text],i)=><article key={title}><span className="step">{String(i+1).padStart(2,"0")}</span><div><h3>{title}</h3><p>{text}</p></div></article>)}</div>
+      <AutoCarousel className="timeline" count={process.length} label="Process" showArrows loopArrows={false}>{process.map(([title,text],i)=><article key={title}><span className="step">{String(i+1).padStart(2,"0")}</span><div><h3>{title}</h3><p>{text}</p></div></article>)}</AutoCarousel>
     </div>
   </section>;
 }
@@ -101,8 +106,8 @@ export function ProcessSection() {
 export function WhyUsSection() {
   return <section id="why-us" className="section navy-section">
     <div className="container"><SectionHeading eyebrow="A practical intelligence partner" title="Why Businesses Choose Peturn"/>
-      <div className="benefit-grid">{benefits.map(([Icon,title,text])=><article key={title}><Icon/><h3>{title}</h3><p>{text}</p></article>)}</div>
-      <div className="center-action"><a className="button light" href="/contact">Discuss Your Reporting Challenges</a></div>
+      <AutoCarousel className="benefit-showcase feature-showcase" count={benefits.length} label="Benefits" showArrows>{benefits.map(([Icon,title,text],i)=><article className="benefit-panel feature-panel" key={title}><div className="feature-visual"><Icon/><span>{String(i+1).padStart(2,"0")}</span></div><div className="feature-copy"><h3>{title}</h3><p>{text}</p></div></article>)}</AutoCarousel>
+      <div className="center-action"><WhatsAppOpenButton className="button light">Discuss Your Reporting Challenges</WhatsAppOpenButton></div>
     </div>
   </section>;
 }
@@ -110,7 +115,7 @@ export function WhyUsSection() {
 export function PricingSection() {
   return <section id="pricing" className="section pricing-section">
     <div className="container"><SectionHeading eyebrow="Flexible ways to begin" title="Analytics Solutions for Every Stage of Growth"/>
-      <div className="pricing-grid">{pricing.map(plan=><article className={plan.featured ? "featured" : ""} key={plan.name}>{plan.featured&&<span className="popular">Recommended</span>}<h3>{plan.name}</h3><p>{plan.description}</p><strong className="price">{plan.price}</strong><ul>{plan.items.map(x=><li key={x}><Check/>{x}</li>)}</ul><a href="/contact#start-conversation" className={`button ${plan.featured?"":"secondary"}`}>Book a Consultation</a></article>)}</div>
+      <div className="pricing-grid">{pricing.map((plan,i)=><article id={`pricing-slide-${i+1}`} className={plan.featured ? "featured" : ""} key={plan.name}>{plan.featured&&<span className="popular">Recommended</span>}<h3>{plan.name}</h3><p>{plan.description}</p><strong className="price">{plan.price}</strong><ul>{plan.items.map(x=><li key={x}><Check/>{x}</li>)}</ul><a href="/contact#start-conversation" className={`button ${plan.featured?"":"secondary"}`}>Book a Consultation</a></article>)}</div>
       <p className="pricing-note">Final pricing depends on data sources, dashboard complexity, reporting frequency, integrations, and project scope.</p>
     </div>
   </section>;
@@ -130,3 +135,4 @@ export function ContactSection() {
     </div><ContactForm/></div>
   </section>;
 }
+
