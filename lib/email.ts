@@ -5,9 +5,9 @@ import { contact } from "@/data/site-content";
 const escapeHtml = (value: string) => value.replace(/[&<>"']/g, char => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" })[char] ?? char);
 
 export async function sendInquiry(data: ContactInput) {
-  const apiKey = process.env.RESEND_API_KEY;
-  const from = process.env.CONTACT_FROM_EMAIL;
-  const to = process.env.CONTACT_TO_EMAIL || contact.email;
+  const apiKey = process.env.RESEND_API_KEY?.trim();
+  const from = process.env.CONTACT_FROM_EMAIL?.trim();
+  const to = process.env.CONTACT_TO_EMAIL?.trim() || contact.email;
   if (!apiKey || !from) throw new Error("EMAIL_NOT_CONFIGURED");
   const resend = new Resend(apiKey);
   const safe = Object.fromEntries(Object.entries(data).map(([key, value]) => [key, typeof value === "string" ? escapeHtml(value) : value])) as Record<string, string | boolean>;
