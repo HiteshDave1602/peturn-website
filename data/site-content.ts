@@ -1,21 +1,5 @@
-export const contact = {
-  email: "dhyanirayka20@gmail.com",
-  website: "www.peturn.in",
-  indiaPhone: "+91 84693 49930",
-  usPhone: "+1 732 801 1981",
-  indiaTel: "+918469349930",
-  usTel: "+17328011981",
-  indiaWhatsApp: "https://wa.me/918469349930",
-  usWhatsApp: "https://wa.me/17328011981",
-} as const;
-
-export const navigation = [
-  { label: "Home", href: "/" },
-  { label: "About Company", href: "/about" },
-  { label: "Services", href: "/services" },
-  { label: "Why Us", href: "/why-us" },
-  { label: "Contact Us", href: "/contact" },
-] as const;
+export { contact, socialLinks } from "@/data/brand-config";
+export { navigation } from "@/data/navigation";
 
 export const services = [
   { title: "Business Intelligence", text: "Centralize your business data into one intelligent platform for better visibility and faster decision-making.", tags: ["Unified data", "Clear KPIs"] },
@@ -47,5 +31,3 @@ export const faqs = [
   ["Do you provide ongoing support?", "Yes. Peturn offers continuous support, dashboard enhancements, and performance reviews based on the selected service plan."],
   ["Can dashboards be customized?", "Yes. Every dashboard is tailored to the business’s reporting requirements, operations, goals, and KPIs."],
 ] as const;
-
-export const socialLinks = { linkedin: "", instagram: "", facebook: "" } as const;

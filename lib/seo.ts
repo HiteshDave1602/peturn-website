@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
+import { brand } from "@/data/brand-config";
 import { contact, faqs, pricing, services } from "@/data/site-content";
 
-export const siteUrl = "https://www.peturn.in";
-export const siteName = "Peturn";
+export const siteUrl = brand.url;
+export const siteName = brand.name;
 
 export const defaultKeywords = [
   "Business Intelligence consulting",
