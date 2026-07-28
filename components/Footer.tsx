@@ -3,6 +3,21 @@ import { Logo } from "@/components/ui/Logo";
 import { brand, contact, socialLinks } from "@/data/brand-config";
 import { navigation } from "@/data/navigation";
 
+const serviceLinks = [
+  { label: "Business Intelligence", href: "/services#business-intelligence" },
+  { label: "Sales Analytics", href: "/services#sales-analytics" },
+  { label: "Inventory Analytics", href: "/services#inventory-analytics" },
+  { label: "Procurement Analytics", href: "/services#procurement-analytics" },
+  { label: "Profitability Analysis", href: "/services#profitability-analysis" },
+  { label: "Executive Reporting", href: "/services#executive-reporting" },
+];
+
+const footerNav = [
+  ...navigation,
+  { label: "Pricing", href: "/pricing" },
+  { label: "FAQ", href: "/#faq" },
+];
+
 export function Footer() {
   return (
     <footer>
@@ -14,9 +29,12 @@ export function Footer() {
         </div>
         <div>
           <h3>Company</h3>
-          {navigation.map((item) => <a key={item.href} href={item.href}>{item.label}</a>)}
+          {footerNav.map((item) => <a key={item.href} href={item.href}>{item.label}</a>)}
         </div>
-
+        <div>
+          <h3>Services</h3>
+          {serviceLinks.map((item) => <a key={item.href} href={item.href}>{item.label}</a>)}
+        </div>
         <div>
           <h3>Contact</h3>
           <a href={`mailto:${contact.email}`}>{contact.email}</a>

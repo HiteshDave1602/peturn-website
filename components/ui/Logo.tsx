@@ -8,6 +8,7 @@ export function Logo({ compact = false }: { compact?: boolean }) {
       alt={brand.logo.alt}
       width={compact ? 230 : brand.logo.width}
       height={compact ? 92 : brand.logo.height}
+      sizes={compact ? "230px" : "180px"}
       priority={!compact}
     />
   );

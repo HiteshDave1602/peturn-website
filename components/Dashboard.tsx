@@ -1,6 +1,7 @@
 "use client";
 import { useId, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 
 const tabs = ["Executive KPI", "Sales", "Inventory", "Profitability"] as const;
 const values = {
@@ -17,10 +18,17 @@ export function MiniDashboard({ compact = false }: { compact?: boolean }) {
   const panelId = `${uid}-panel`;
   const selectedIndex = tabs.indexOf(tab);
   const selectedTabId = `${uid}-tab-${selectedIndex}`;
+  const prefersReduced = useReducedMotion();
 
   const selectRelativeTab = (offset: number) => {
     const nextIndex = (selectedIndex + offset + tabs.length) % tabs.length;
     setTab(tabs[nextIndex]);
+  };
+
+  const panelVariants = {
+    initial: prefersReduced ? { opacity: 1 } : { opacity: 0, y: 8 },
+    animate: { opacity: 1, y: 0 },
+    exit: prefersReduced ? { opacity: 1 } : { opacity: 0, y: -6 },
   };
 
   return <div className={`dashboard ${compact ? "compact" : ""}`}>
@@ -56,18 +64,29 @@ export function MiniDashboard({ compact = false }: { compact?: boolean }) {
       >{t}</button>)}
     </div>}
     <div id={panelId} role="tabpanel" aria-labelledby={selectedTabId} className="dashboard-panel">
-    <div className="metrics">{data.metrics.map(([name, value, change]) => <div className="metric" key={name}><span>{name}</span><strong>{value}</strong><small><ArrowUpRight size={12} /> {change}</small></div>)}</div>
-    <div className="chart-row">
-      <div className="line-chart"><div className="chart-title"><span>Performance trend</span><b>Jan — Jun</b></div>
-        <svg viewBox="0 0 320 100" role="img" aria-label={`${tab} performance trend line`}>
-          <defs><linearGradient id={`${uid}-fill-${compact}`} x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#1D6CDB" stopOpacity=".22"/><stop offset="1" stopColor="#1D6CDB" stopOpacity="0"/></linearGradient></defs>
-          {[20,45,70,95].map(y => <line key={y} x1="0" y1={y} x2="320" y2={y} stroke="#e2e7f0" />)}
-          <polygon points={`5,95 ${data.line} 315,95`} fill={`url(#${uid}-fill-${compact})`} />
-          <polyline points={data.line} fill="none" stroke="#1D6CDB" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      </div>
-      <div className="bar-chart"><div className="chart-title"><span>By region</span><b>Revenue</b></div>{[["West", 88], ["North", 72], ["South", 61], ["East", 48]].map(([n,v]) => <div className="bar" key={n}><span>{n}</span><i><em style={{width:`${v}%`}} /></i><b>{v}%</b></div>)}</div>
-    </div>
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={tab}
+        variants={panelVariants}
+        initial="initial"
+        animate="animate"
+        exit="exit"
+        transition={{ duration: prefersReduced ? 0 : 0.3, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <div className="metrics">{data.metrics.map(([name, value, change]) => <div className="metric" key={name}><span>{name}</span><strong>{value}</strong><small><ArrowUpRight size={12} /> {change}</small></div>)}</div>
+        <div className="chart-row">
+          <div className="line-chart"><div className="chart-title"><span>Performance trend</span><b>Jan — Jun</b></div>
+            <svg viewBox="0 0 320 100" role="img" aria-label={`${tab} performance trend line`}>
+              <defs><linearGradient id={`${uid}-fill-${compact}`} x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#1D6CDB" stopOpacity=".22"/><stop offset="1" stopColor="#1D6CDB" stopOpacity="0"/></linearGradient></defs>
+              {[20,45,70,95].map(y => <line key={y} x1="0" y1={y} x2="320" y2={y} stroke="#e2e7f0" />)}
+              <polygon points={`5,95 ${data.line} 315,95`} fill={`url(#${uid}-fill-${compact})`} />
+              <polyline points={data.line} fill="none" stroke="#1D6CDB" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </div>
+          <div className="bar-chart"><div className="chart-title"><span>By region</span><b>Revenue</b></div>{[["West", 88], ["North", 72], ["South", 61], ["East", 48]].map(([n,v]) => <div className="bar" key={n}><span>{n}</span><i><em style={{width:`${v}%`}} /></i><b>{v}%</b></div>)}</div>
+        </div>
+      </motion.div>
+    </AnimatePresence>
     </div>
   </div>;
 }

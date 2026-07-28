@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { contactSchema } from "@/lib/validation";
 import { sendInquiry } from "@/lib/email";
+import { contact } from "@/data/site-content";
 
 export async function POST(request: Request) {
   try {
@@ -13,7 +14,7 @@ export async function POST(request: Request) {
     const configurationError = error instanceof Error && error.message === "EMAIL_NOT_CONFIGURED";
     return NextResponse.json({
       success: false,
-      message: configurationError ? "Email delivery is not configured. Please email hello@peturn.in directly." : "We could not send your request. Please email hello@peturn.in or contact us by phone or WhatsApp."
+      message: configurationError ? `Email delivery is not configured. Please email ${contact.email} directly.` : `We could not send your request. Please email ${contact.email} or contact us by phone or WhatsApp.`
     }, { status: configurationError ? 503 : 500 });
   }
 }
