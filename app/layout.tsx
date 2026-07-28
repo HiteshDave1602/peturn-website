@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Anton, Poppins } from "next/font/google";
+import { Inter, Poppins, IBM_Plex_Mono } from "next/font/google";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { WhatsAppChooser } from "@/components/Interactive";
@@ -8,8 +8,9 @@ import { brand } from "@/data/brand-config";
 import { buildWebsiteJsonLd, createMetadata } from "@/lib/seo";
 import "./globals.css";
 
-const anton = Anton({ subsets: ["latin"], weight: "400", variable: "--font-anton", display: "swap" });
-const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600", "700", "800"], variable: "--font-poppins", display: "swap" });
+const inter = Inter({ subsets: ["latin"], weight: ["400", "500", "600"], variable: "--font-inter", display: "swap" });
+const poppins = Poppins({ subsets: ["latin"], weight: ["600", "700"], variable: "--font-poppins", display: "swap" });
+const ibmPlexMono = IBM_Plex_Mono({ subsets: ["latin"], weight: ["500", "600"], variable: "--font-ibm-plex-mono", display: "swap" });
 
 export const metadata: Metadata = {
   ...createMetadata("/"),
@@ -25,5 +26,5 @@ export const metadata: Metadata = {
 export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#061433" };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en"><body className={`${anton.variable} ${poppins.variable}`}><Header />{children}<Footer/><WhatsAppChooser/><JsonLd data={buildWebsiteJsonLd()} /></body></html>;
+  return <html lang="en"><body className={`${inter.variable} ${poppins.variable} ${ibmPlexMono.variable}`}><Header />{children}<Footer/><WhatsAppChooser/><JsonLd data={buildWebsiteJsonLd()} /></body></html>;
 }
