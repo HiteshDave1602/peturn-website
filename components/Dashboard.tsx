@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useId, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 
 const tabs = ["Executive KPI", "Sales", "Inventory", "Profitability"] as const;
@@ -11,24 +11,63 @@ const values = {
 };
 
 export function MiniDashboard({ compact = false }: { compact?: boolean }) {
+  const uid = `dashboard-${useId().replace(/:/g, "")}`;
   const [tab, setTab] = useState<(typeof tabs)[number]>("Executive KPI");
   const data = values[tab];
+  const panelId = `${uid}-panel`;
+  const selectedIndex = tabs.indexOf(tab);
+  const selectedTabId = `${uid}-tab-${selectedIndex}`;
+
+  const selectRelativeTab = (offset: number) => {
+    const nextIndex = (selectedIndex + offset + tabs.length) % tabs.length;
+    setTab(tabs[nextIndex]);
+  };
+
   return <div className={`dashboard ${compact ? "compact" : ""}`}>
-    <div className="dash-head"><div><span className="demo">Demo Data</span><h3>{tab} Dashboard</h3></div><span className="live"><i /> Updated now</span></div>
+    <div className="dash-head"><div><span className="demo">Demo Data Preview</span><h3>{tab} Dashboard</h3><p>Sample metrics shown for layout and reporting context.</p></div><span className="live"><i /> Demo refresh</span></div>
     {!compact && <div className="dash-tabs" role="tablist" aria-label="Dashboard preview">
-      {tabs.map(t => <button key={t} role="tab" aria-selected={t === tab} onClick={() => setTab(t)}>{t}</button>)}
+      {tabs.map(t => <button
+        key={t}
+        id={`${uid}-tab-${tabs.indexOf(t)}`}
+        role="tab"
+        type="button"
+        aria-selected={t === tab}
+        aria-controls={panelId}
+        tabIndex={t === tab ? 0 : -1}
+        onClick={() => setTab(t)}
+        onKeyDown={(event) => {
+          if (event.key === "ArrowRight") {
+            event.preventDefault();
+            selectRelativeTab(1);
+          }
+          if (event.key === "ArrowLeft") {
+            event.preventDefault();
+            selectRelativeTab(-1);
+          }
+          if (event.key === "Home") {
+            event.preventDefault();
+            setTab(tabs[0]);
+          }
+          if (event.key === "End") {
+            event.preventDefault();
+            setTab(tabs[tabs.length - 1]);
+          }
+        }}
+      >{t}</button>)}
     </div>}
+    <div id={panelId} role="tabpanel" aria-labelledby={selectedTabId} className="dashboard-panel">
     <div className="metrics">{data.metrics.map(([name, value, change]) => <div className="metric" key={name}><span>{name}</span><strong>{value}</strong><small><ArrowUpRight size={12} /> {change}</small></div>)}</div>
     <div className="chart-row">
       <div className="line-chart"><div className="chart-title"><span>Performance trend</span><b>Jan — Jun</b></div>
         <svg viewBox="0 0 320 100" role="img" aria-label={`${tab} performance trend line`}>
-          <defs><linearGradient id={`fill-${compact}`} x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#1D6CDB" stopOpacity=".22"/><stop offset="1" stopColor="#1D6CDB" stopOpacity="0"/></linearGradient></defs>
+          <defs><linearGradient id={`${uid}-fill-${compact}`} x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#1D6CDB" stopOpacity=".22"/><stop offset="1" stopColor="#1D6CDB" stopOpacity="0"/></linearGradient></defs>
           {[20,45,70,95].map(y => <line key={y} x1="0" y1={y} x2="320" y2={y} stroke="#e2e7f0" />)}
-          <polygon points={`5,95 ${data.line} 315,95`} fill={`url(#fill-${compact})`} />
+          <polygon points={`5,95 ${data.line} 315,95`} fill={`url(#${uid}-fill-${compact})`} />
           <polyline points={data.line} fill="none" stroke="#1D6CDB" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </div>
       <div className="bar-chart"><div className="chart-title"><span>By region</span><b>Revenue</b></div>{[["West", 88], ["North", 72], ["South", 61], ["East", 48]].map(([n,v]) => <div className="bar" key={n}><span>{n}</span><i><em style={{width:`${v}%`}} /></i><b>{v}%</b></div>)}</div>
+    </div>
     </div>
   </div>;
 }

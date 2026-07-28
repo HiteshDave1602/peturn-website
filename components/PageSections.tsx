@@ -1,4 +1,4 @@
-import { BarChart3, Building2, Check, ChartNoAxesCombined, CircleDollarSign, ClipboardCheck, Database, FileSpreadsheet, Gauge, Lightbulb, LockKeyhole, Mail, Map, PackageSearch, Phone, RefreshCw, Settings2, ShieldCheck, ShoppingBasket, Target, TrendingUp, Users, WalletCards } from "lucide-react";
+import { BarChart3, Building2, Check, CircleDollarSign, ClipboardCheck, Database, FileSpreadsheet, Gauge, Lightbulb, LockKeyhole, Mail, Map, MessageCircle, PackageSearch, Phone, RefreshCw, Settings2, ShieldCheck, ShoppingBasket, Target, TrendingUp, Users, WalletCards } from "lucide-react";
 import { ContactForm } from "@/components/ContactForm";
 import { MiniDashboard } from "@/components/Dashboard";
 import { DashboardCTA, FAQList, WhatsAppOpenButton } from "@/components/Interactive";
@@ -16,6 +16,19 @@ const process = [
   ["Review and Optimization", "We review the dashboards with your team and refine them based on feedback."],
   ["Delivery and Support", "We deploy the solution and provide continuous support to ensure long-term success."]
 ];
+const trustClaims = [
+  [LockKeyhole, "Confidential handling", "Your business information stays private and is used only for your inquiry and project work."],
+  [Settings2, "Tailored dashboards", "Dashboards are shaped around your reporting requirements, operations, goals, and KPIs."],
+  [Database, "Demo-data transparency", "Sample dashboards clearly use demo values and never present client data as proof."],
+] as const;
+const serviceOutcomes = [
+  ["Scattered reporting makes one reliable view difficult.", "A unified BI layer that keeps KPIs visible and decision-ready."],
+  ["Sales teams need to know where revenue, customers, and products are moving.", "Clear sales performance views for trends, regions, and product focus."],
+  ["Stock decisions are harder when availability, aging, and turns are hidden.", "Inventory visibility that supports reorder planning and working-capital control."],
+  ["Purchasing costs and supplier patterns can be hard to compare.", "Procurement reporting that highlights spend, vendors, and cost movement."],
+  ["Profit can vary across products, departments, and categories.", "Margin views that show where sustainable profit is being created."],
+  ["Leadership needs fewer manual reports and clearer signals.", "Executive-ready reporting with KPIs, trends, risks, and recommendations."],
+] as const;
 const benefits = [
   [Target, "Business-focused analytics", "Insights stay connected to commercial goals and operational priorities."],
   [Settings2, "Customized dashboards", "Your views reflect the KPIs, workflows and decisions that matter to your team."],
@@ -33,12 +46,23 @@ export function HeroSection() {
     <div className="container hero-grid">
       <div className="hero-copy">
         <p className="eyebrow">Business Intelligence &amp; Analytics Consulting</p>
-        <h1>Transform Your Business Data into <span>Smarter Decisions</span></h1>
-        <p className="lead">We help businesses turn scattered data into meaningful insights through Business Intelligence, interactive dashboards, and analytics solutions that improve profitability, efficiency, and decision-making.</p>
-        <p className="hero-statement">Data-Driven Decisions. Measurable Growth. Smarter Business.</p>
-        <div className="actions"><a className="button" href="/contact#start-conversation">Book a Free Consultation</a><a className="button secondary" href="#sample-dashboards">View Sample Dashboard</a></div>
-        <div className="trust-row"><span><ShieldCheck/> Confidential by design</span><span><Settings2/> Built around your business</span></div>
+        <h1>Turn business data into decisions leaders can act on.</h1>
+        <p className="lead">Peturn builds practical BI dashboards that connect sales, inventory, procurement, profitability, and executive reporting into one clearer view of your business.</p>
+        <p className="hero-statement">Less manual reporting. Sharper visibility. Better business decisions.</p>
+        <div className="actions"><a className="button" href="/contact#start-conversation">Book a Free Consultation</a><a className="button secondary" href="#sample-dashboards">Explore Demo Dashboard</a></div>
+        <div className="trust-row"><span><ShieldCheck/> Confidential by design</span><span><Settings2/> Tailored to your KPIs</span><span><Database/> Demo data clearly labeled</span></div>
       </div>
+    </div>
+  </section>;
+}
+
+export function TrustStripSection() {
+  return <section className="trust-strip" aria-label="Peturn trust commitments">
+    <div className="container trust-strip-grid">
+      {trustClaims.map(([Icon, title, text]) => <article key={title}>
+        <Icon/>
+        <div><h2>{title}</h2><p>{text}</p></div>
+      </article>)}
     </div>
   </section>;
 }
@@ -68,8 +92,15 @@ export function ProblemsSection() {
 export function ServicesSection() {
   return <section id="services" className="section">
     <div className="container"><SectionHeading eyebrow="What we help you see" title="Business Intelligence Solutions Built Around Your Business" text="From sales and inventory to procurement and profitability, Peturn helps you see what is happening, understand why it is happening, and decide what to do next."/>
-      <div className="services-radial" aria-label="Peturn services">
-        {services.map((item,i) => { const Icon=serviceIcons[i]; return <article className="service-orb" tabIndex={0} key={item.title}><div className="service-orb-icon"><Icon/></div><h3>{item.title}</h3><p>{item.text}</p><div className="tags">{item.tags.map(t=><span key={t}>{t}</span>)}</div></article>; })}
+      <div className="services-radial services-home-grid" aria-label="Peturn services">
+        {services.map((item,i) => { const Icon=serviceIcons[i]; const [problem, outcome] = serviceOutcomes[i]; return <article className="service-orb service-home-card" key={item.title}>
+          <div className="service-orb-icon"><Icon/></div>
+          <h3>{item.title}</h3>
+          <p>{item.text}</p>
+          <dl><div><dt>Business problem</dt><dd>{problem}</dd></div><div><dt>Outcome</dt><dd>{outcome}</dd></div></dl>
+          <div className="tags">{item.tags.slice(0, 3).map(t=><span key={t}>{t}</span>)}</div>
+          <a href="/services" aria-label={`Learn more about ${item.title}`}>View service</a>
+        </article>; })}
       </div>
     </div>
   </section>;
@@ -79,7 +110,7 @@ export function SampleDashboardsSection() {
   return <section id="sample-dashboards" className="section blue-section">
     <div className="container dashboard-section"><SectionHeading eyebrow="Interactive preview" title="See Your Business More Clearly" text="Explore examples of the dashboard solutions Peturn can customize around your data, goals, and KPIs."/>
       <div className="category-strip" aria-label="Available dashboard categories">{["Executive KPI Dashboard","Sales Dashboard","Inventory Dashboard","Procurement Dashboard","Profitability Dashboard","Customer Analytics","Business Performance Dashboard","Financial Summary Dashboard"].map(x=><span key={x}>{x}</span>)}</div>
-      <MiniDashboard/><p className="demo-note">All values and visualizations shown above are <strong>Demo Data</strong> and do not represent a real client.</p><DashboardCTA/>
+      <MiniDashboard/><p className="demo-note"><strong>Demo Data:</strong> All values and visualizations shown above are sample data and do not represent a real client.</p><DashboardCTA/>
     </div>
   </section>;
 }
@@ -97,7 +128,7 @@ export function IndustriesSection() {
 
 export function ProcessSection() {
   return <section id="process" className="section process-section">
-    <div className="container"><SectionHeading eyebrow="How we work" title="A Clear Process from Raw Data to Better Decisions"/>
+    <div className="container"><SectionHeading eyebrow="How we work" title="A Clear Path from Raw Data to Decision-Ready Dashboards" text="Each step is designed to reduce ambiguity, align stakeholders, and turn reporting needs into practical business intelligence."/>
       <AutoCarousel className="timeline" count={process.length} label="Process" showArrows loopArrows={false}>{process.map(([title,text],i)=><article key={title}><span className="step">{String(i+1).padStart(2,"0")}</span><div><h3>{title}</h3><p>{text}</p></div></article>)}</AutoCarousel>
     </div>
   </section>;
@@ -124,6 +155,19 @@ export function PricingSection() {
 export function FAQSection() {
   return <section id="faq" className="section">
     <div className="container faq-grid"><SectionHeading align="left" eyebrow="Common questions" title="Clarity Before We Begin" text="Practical answers about data, security, customization and support."/><FAQList/></div>
+  </section>;
+}
+
+export function FinalCTASection() {
+  return <section className="section final-cta-section" aria-labelledby="final-cta-title">
+    <div className="container final-cta">
+      <div>
+        <p className="eyebrow">Ready to begin</p>
+        <h2 id="final-cta-title">Bring clarity to your next business decision.</h2>
+        <p>Share your reporting challenge through the contact form, or open the WhatsApp chooser to start a direct conversation with Peturn.</p>
+      </div>
+      <div className="final-cta-actions"><a className="button light" href="/contact#start-conversation">Go to Contact Form</a><WhatsAppOpenButton className="button secondary"><MessageCircle size={18}/> Open WhatsApp Chooser</WhatsAppOpenButton></div>
+    </div>
   </section>;
 }
 

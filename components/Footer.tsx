@@ -2,7 +2,6 @@ import Link from "next/link";
 import { Logo } from "@/components/ui/Logo";
 import { brand, contact, socialLinks } from "@/data/brand-config";
 import { navigation } from "@/data/navigation";
-import { services } from "@/data/site-content";
 
 export function Footer() {
   return (
@@ -17,10 +16,7 @@ export function Footer() {
           <h3>Company</h3>
           {navigation.map((item) => <a key={item.href} href={item.href}>{item.label}</a>)}
         </div>
-        <div className="footer-services">
-          <h3>Services</h3>
-          {services.slice(0, 5).map((service) => <span key={service.title}>{service.title}</span>)}
-        </div>
+
         <div>
           <h3>Contact</h3>
           <a href={`mailto:${contact.email}`}>{contact.email}</a>

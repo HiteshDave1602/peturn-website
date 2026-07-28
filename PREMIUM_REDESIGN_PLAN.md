@@ -93,6 +93,8 @@ Files this phase will touch:
 
 ## Phase 2: Homepage
 
+Status: Complete.
+
 Goal: redesign the homepage into a premium conversion path: hero, trust strip, services, dashboard, process, FAQ, and CTA.
 
 Work items:

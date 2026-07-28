@@ -22,11 +22,11 @@ export function ContactForm() {
       const body = await response.json() as { success: boolean; message: string };
       setStatus({ type: body.success ? "success" : "error", text: body.message });
       if (body.success) reset();
-    } catch { setStatus({ type: "error", text: "We could not send your request. Please email dhyanirayka20@gmail.com." }); }
+    } catch { setStatus({ type: "error", text: "We could not send your request. Please email hello@peturn.in." }); }
   };
   const field = (name: keyof ContactInput) => errors[name]?.message;
   return <form className="contact-form" onSubmit={handleSubmit(submit)} noValidate>
-    <div className="honeypot" aria-hidden="true"><label>Website<input tabIndex={-1} autoComplete="off" {...register("website")} /></label></div>
+    <div className="honeypot" aria-hidden="true" style={{ position: "absolute", left: "-10000px" }}><label>Website<input tabIndex={-1} autoComplete="off" {...register("website")} aria-hidden="true" /></label></div>
     <div className="form-grid">
       <label>Full Name<input {...register("fullName")} maxLength={80} aria-invalid={!!errors.fullName} aria-describedby="fullName-error" /><span id="fullName-error">{field("fullName")}</span></label>
       <label>Work Email<input type="email" {...register("email")} maxLength={120} aria-invalid={!!errors.email} aria-describedby="email-error" /><span id="email-error">{field("email")}</span></label>

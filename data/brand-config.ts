@@ -14,7 +14,7 @@ export const brand = {
 } as const;
 
 export const contact = {
-  email: "dhyanirayka20@gmail.com",
+  email: "hello@peturn.in",
   website: brand.website,
   indiaPhone: "+91 84693 49930",
   usPhone: "+1 732 801 1981",

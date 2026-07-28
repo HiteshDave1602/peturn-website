@@ -1,5 +1,5 @@
 "use client";
-import { ChevronDown, MessageCircle, X } from "lucide-react";
+import { ChevronDown, X } from "lucide-react";
 import { type ReactNode, useEffect, useState } from "react";
 import { contact, faqs } from "@/data/site-content";
 
