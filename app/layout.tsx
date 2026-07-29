@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Poppins, IBM_Plex_Mono } from "next/font/google";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-import { BackToTop } from "@/components/BackToTop";
 import { WhatsAppChooser } from "@/components/Interactive";
 import { JsonLd } from "@/components/JsonLd";
 import { brand } from "@/data/brand-config";
@@ -27,5 +26,5 @@ export const metadata: Metadata = {
 export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#061433" };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en"><body className={`${inter.variable} ${poppins.variable} ${ibmPlexMono.variable}`}><Header />{children}<Footer/><WhatsAppChooser/><BackToTop/><JsonLd data={buildWebsiteJsonLd()} /></body></html>;
+  return <html lang="en"><body className={`${inter.variable} ${poppins.variable} ${ibmPlexMono.variable}`}><Header />{children}<Footer/><WhatsAppChooser/><JsonLd data={buildWebsiteJsonLd()} /></body></html>;
 }

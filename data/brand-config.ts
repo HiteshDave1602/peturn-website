@@ -2,7 +2,7 @@ export const brand = {
   name: "Peturn",
   legalName: "Peturn",
   tagline: "Business Intelligence | Analytics | Dashboards | Business Consulting",
-  shortDescription: "Helping businesses transform data into better decisions.",
+  description: "Peturn is a Business Intelligence and Analytics consulting company that turns scattered business data into clear, decision-ready dashboards. We help retail and manufacturing businesses gain visibility into sales, inventory, procurement, and profitability.",
   website: "www.peturn.in",
   url: "https://www.peturn.in",
   logo: {
@@ -15,6 +15,7 @@ export const brand = {
 
 export const contact = {
   email: "hello@peturn.in",
+  email2: "peturn1111@gmail.com",
   website: brand.website,
   indiaPhone: "+91 84693 49930",
   usPhone: "+1 732 801 1981",
