@@ -45,7 +45,11 @@ const impactStats = [
 
 export function HeroSection() {
   return <section id="home" className="hero">
-    <div className="hero-bg" aria-hidden="true"><Image src="/images/hero image .jpg" alt="" fill priority sizes="100vw" /></div>
+    <div className="hero-bg" aria-hidden="true">
+      <video autoPlay loop muted playsInline preload="auto" poster="/images/hero-poster.jpeg">
+        <source src="/images/hero-video.mp4" type="video/mp4" />
+      </video>
+    </div>
     <div className="hero-orbit" aria-hidden="true"><i/><i/><i/><svg viewBox="0 0 300 180"><path d="M10 155 C70 150 82 105 132 112 S210 65 286 20"/><path d="m265 20 21 0 0 21"/></svg></div>
     <div className="container hero-grid">
       <div className="hero-copy">

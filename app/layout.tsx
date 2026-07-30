@@ -8,9 +8,9 @@ import { brand } from "@/data/brand-config";
 import { buildWebsiteJsonLd, createMetadata } from "@/lib/seo";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"], weight: ["400", "500", "600"], variable: "--font-inter", display: "swap" });
-const poppins = Poppins({ subsets: ["latin"], weight: ["600", "700"], variable: "--font-poppins", display: "swap" });
-const ibmPlexMono = IBM_Plex_Mono({ subsets: ["latin"], weight: ["500", "600"], variable: "--font-ibm-plex-mono", display: "swap" });
+const inter = Inter({ subsets: ["latin"], weight: ["400", "500"], variable: "--font-inter", display: "swap" });
+const poppins = Poppins({ subsets: ["latin"], weight: ["600"], variable: "--font-poppins", display: "swap" });
+const ibmPlexMono = IBM_Plex_Mono({ subsets: ["latin"], weight: ["600"], variable: "--font-ibm-plex-mono", display: "swap" });
 
 export const metadata: Metadata = {
   ...createMetadata("/"),
@@ -26,5 +26,5 @@ export const metadata: Metadata = {
 export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#061433" };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en"><body className={`${inter.variable} ${poppins.variable} ${ibmPlexMono.variable}`}><Header />{children}<Footer/><WhatsAppChooser/><JsonLd data={buildWebsiteJsonLd()} /></body></html>;
+  return <html lang="en" className={`${inter.variable} ${poppins.variable} ${ibmPlexMono.variable}`}><body><Header />{children}<Footer/><WhatsAppChooser/><JsonLd data={buildWebsiteJsonLd()} /></body></html>;
 }
