@@ -46,7 +46,7 @@ const impactStats = [
 export function HeroSection() {
   return <section id="home" className="hero">
     <div className="hero-bg" aria-hidden="true">
-      <video autoPlay loop muted playsInline preload="auto" poster="/images/hero-poster.jpeg">
+      <video autoPlay loop muted playsInline preload="auto">
         <source src="/images/hero-video.mp4" type="video/mp4" />
       </video>
     </div>

@@ -2806,6 +2806,11 @@ footer{
     padding-top:118px;
   }
 
+  .hero-bg img,
+  .hero-bg video{
+    object-position:85% top;
+  }
+
   .trust-strip{
     margin-top:0;
     padding:32px 0 0;
