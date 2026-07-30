@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { BarChart3, Building2, Cable, ChartNoAxesCombined, Check, CircleDollarSign, ClipboardCheck, Database, FileSpreadsheet, FileText, Gauge, HardDrive, Headphones, LayoutDashboard, Lightbulb, LockKeyhole, Mail, Map, MessageCircle, PackageSearch, Phone, Presentation, RefreshCw, Settings2, ShieldCheck, ShoppingBasket, Target, TrendingUp, Users, WalletCards } from "lucide-react";
+import { BarChart3, Building2, Cable, ChartNoAxesCombined, Check, CircleDollarSign, ClipboardCheck, Database, FileSpreadsheet, FileText, Gauge, HardDrive, Headphones, LayoutDashboard, Mail, Map, MessageCircle, PackageSearch, Phone, Presentation, RefreshCw, ShieldCheck, ShoppingBasket, Target, TrendingUp } from "lucide-react";
 import { ContactForm } from "@/components/ContactForm";
 import { MiniDashboard } from "@/components/Dashboard";
 import { DashboardCTA, FAQList, WhatsAppOpenButton } from "@/components/Interactive";
@@ -8,7 +8,7 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { ProcessTimeline } from "@/components/ProcessTimeline";
 import { HeroSeq } from "@/components/HeroMotion";
 import { Reveal } from "@/components/Reveal";
-import { BlurUp, BorderTraceCard, ConnectorStem, ScatterReveal, ShieldDraw, SlideIn, WipeImage } from "@/components/HomeAnimations";
+import { BlurUp, BorderTraceCard, ConnectorStem, CountUp, ScatterReveal, ShieldDraw, SlideIn, WipeImage } from "@/components/HomeAnimations";
 import { contact, pricing, services } from "@/data/site-content";
 
 const problemIcons = [FileSpreadsheet, RefreshCw, Database, Gauge];
@@ -30,20 +30,22 @@ const serviceOutcomes = [
   ["Profit can vary across products, departments, and categories.", "Margin views that show where sustainable profit is being created."],
   ["Leadership needs fewer manual reports and clearer signals.", "Executive-ready reporting with KPIs, trends, risks, and recommendations."],
 ] as const;
-const benefits = [
-  [Target, "Business-focused analytics", "Insights stay connected to commercial goals and operational priorities."],
-  [Settings2, "Customized dashboards", "Your views reflect the KPIs, workflows and decisions that matter to your team."],
-  [WalletCards, "Affordable solutions", "Practical engagement options help growing businesses begin with the right scope."],
-  [Lightbulb, "Actionable business insights", "Reporting is designed to make the next decision clearer, not just display numbers."],
-  [LockKeyhole, "Data privacy and confidentiality", "Business information is handled responsibly with confidentiality as a priority."],
-  [Users, "Professional consulting approach", "Clear discovery, review and delivery stages keep stakeholders aligned."],
-  [ShieldCheck, "Continuous support", "Ongoing help keeps dashboards useful as reporting needs evolve."],
-  [TrendingUp, "Scalable solutions", "The reporting foundation can expand with new data, users and business questions."]
+const whyUsCards = [
+  ["Business-focused analytics", "Insights stay connected to commercial goals and operational priorities, not just raw numbers."],
+  ["Customized dashboards", "Every view reflects the KPIs, workflows and decisions that matter to your specific team."],
+  ["Continuous support", "Ongoing help keeps dashboards accurate and useful as your reporting needs evolve."],
+] as const;
+
+const impactStats = [
+  { value: 5, decimals: 0, suffix: "x", label: "Faster Decisions", text: "Organizations using business intelligence daily make decisions roughly five times faster than teams relying on manual reporting." },
+  { value: 23, decimals: 0, suffix: "x", label: "More Customer Growth", text: "Data-driven companies are 23 times more likely to acquire new customers, according to Harvard Business Review research." },
+  { value: 3.8, decimals: 1, suffix: "x", label: "Higher ROI", text: "Organizations that act on data-driven insights see nearly four times the return on investment of those that don't." },
+  { value: 77, decimals: 0, suffix: "%", label: "Higher Success Rate", text: "CEOs who lead with data-driven decisions report a significantly higher success rate, per Deloitte research." },
 ] as const;
 
 export function HeroSection() {
   return <section id="home" className="hero">
-    <div className="hero-bg" aria-hidden="true"><Image src="/images/growth-trend.webp" alt="" fill priority sizes="100vw" /></div>
+    <div className="hero-bg" aria-hidden="true"><Image src="/images/hero image .jpg" alt="" fill priority sizes="100vw" /></div>
     <div className="hero-orbit" aria-hidden="true"><i/><i/><i/><svg viewBox="0 0 300 180"><path d="M10 155 C70 150 82 105 132 112 S210 65 286 20"/><path d="m265 20 21 0 0 21"/></svg></div>
     <div className="container hero-grid">
       <div className="hero-copy">
@@ -65,7 +67,7 @@ export function AboutSection() {
       <div className="about-visual image-visual"><Image src="/images/02-about-company.jpg" alt="Peturn analytics consultation meeting" width={600} height={400} className="about-img" sizes="(max-width: 768px) 100vw, 50vw" /></div>
       <div className="mission-grid">
         <article id="mission-slide-1" className="mission-card"><Map/><h3>Our Mission</h3><p>To help businesses make smarter decisions through simple, affordable, and data-driven analytics.</p></article>
-        <article id="mission-slide-2" className="mission-card"><Target/><h3>Our Vision</h3><p>To become one of India&apos;s most trusted Business Intelligence consulting companies, helping organizations make smarter decisions through data and innovation.</p></article>
+        <article id="mission-slide-2" className="mission-card"><Target/><h3>Our Vision</h3><p>To become the most trusted Business Intelligence partner for SMEs.</p></article>
       </div>
     </div>
   </section>;
@@ -77,6 +79,15 @@ export function ProblemsSection() {
       <Reveal><SectionHeading eyebrow="From complexity to clarity" title="Your Business Has Data. The Challenge Is Turning It into Direction." /></Reveal>
       <div className="four-grid">{["Scattered spreadsheets","Manual reporting","Disconnected systems","Slow decision-making"].map((x,i) => { const Icon=problemIcons[i]; return <ScatterReveal key={x} index={i} className="problem-card" id={`problem-slide-${i+1}`}><Icon/><h3>{x}</h3><p>{["Different versions make one reliable view difficult.","Repetitive report preparation consumes valuable time.","Key information stays isolated across business tools.","Late information delays confident action."][i]}</p></ScatterReveal>; })}</div>
       <Reveal><p className="solution-line"><span>Peturn transforms</span> disconnected business information into clear dashboards, reliable reporting, and actionable insights.</p></Reveal>
+    </div>
+  </section>;
+}
+
+export function ImpactStatsSection() {
+  return <section id="impact-stats" className="section stats-section">
+    <div className="container"><Reveal><SectionHeading eyebrow="Backed by research" title="What Data-Driven Decision-Making Delivers" text="Independent industry research shows what clear, connected reporting can change for a business — beyond just internal reporting."/></Reveal>
+      <div className="stats-strip">{impactStats.map(({ value, decimals, suffix, label }, i) => <Reveal key={label} as="article" delay={i * 0.08} className="stat-item"><strong className="stat-number"><CountUp value={value} decimals={decimals} duration={1.4 + i * 0.15} /><span>{suffix}</span></strong><h3>{label}</h3></Reveal>)}</div>
+      <p className="stats-source">Source: general industry research (Deloitte, Harvard Business Review and related studies) on data-driven decision-making — not Peturn-specific client results.</p>
     </div>
   </section>;
 }
@@ -128,27 +139,25 @@ export function ProcessSection() {
 }
 
 export function WhyUsSection() {
-  return <section id="why-us" className="section navy-section">
-    <div className="container"><SectionHeading eyebrow="A practical intelligence partner" title="Why Businesses Choose Peturn"/>
-      <div className="why-us-split">
-        <div className="why-us-visual" aria-hidden="true">
-          <div className="why-us-image-wrap">
-            <Image src="/images/why-us-visual.webp" alt="" width={736} height={1104} className="about-img" sizes="(max-width: 768px) 100vw, 50vw" />
-          </div>
-        </div>
-        <div className="why-us-benefits">
-          {benefits.map(([Icon, title, text], i) => (
-            <Reveal as="article" key={title} delay={i * 0.06} className="why-us-benefit">
-              <div className="why-us-benefit-icon"><Icon /></div>
-              <div className="why-us-benefit-copy">
-                <h3>{title}</h3>
-                <p>{text}</p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
+  return <section id="why-us" className="section why-us-section">
+    <div className="container why-us-layout">
+      <div className="why-us-cards-col">
+        <div className="why-us-blob" aria-hidden="true"></div>
+        {whyUsCards.map(([title, text], i) => (
+          <Reveal as="article" key={title} delay={i * 0.1} className="why-us-card">
+            <span className="why-us-card-number">{i + 1}</span>
+            <h3>{title}</h3>
+            <p>{text}</p>
+          </Reveal>
+        ))}
       </div>
-      <div className="center-action"><a className="button light" href="/contact#start-conversation">Discuss Your Reporting Challenges</a></div>
+      <Reveal as="div" delay={0.15} className="why-us-info-col">
+        <div className="why-us-orbit" aria-hidden="true"><span/></div>
+        <p className="eyebrow">A practical intelligence partner</p>
+        <h2>Why Businesses <span>Choose Peturn</span></h2>
+        <p className="lead">Peturn stays close to how your business actually runs, turning scattered data into dashboards and decisions your team can trust — with the support to keep them useful over time.</p>
+        <a className="button why-us-cta" href="/contact#start-conversation">Discuss Your Reporting Challenges</a>
+      </Reveal>
     </div>
   </section>;
 }

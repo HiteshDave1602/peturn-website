@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/JsonLd";
 import ScrollReveal from "@/components/ScrollReveal";
-import { DeliverablesSection, FAQSection, HeroSection, IllustrativeScenarioSection, IndustriesSection, IntegrationsSection, PricingSection, ProblemsSection, ProcessSection, SampleDashboardsSection, SecuritySection } from "@/components/PageSections";
+import { DeliverablesSection, FAQSection, HeroSection, IllustrativeScenarioSection, ImpactStatsSection, IndustriesSection, IntegrationsSection, PricingSection, ProblemsSection, ProcessSection, SampleDashboardsSection, SecuritySection } from "@/components/PageSections";
 import { buildBreadcrumbJsonLd, buildFaqJsonLd, buildPageJsonLd, createMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createMetadata("/");
@@ -12,6 +12,7 @@ export default function Home() {
     <main id="main">
       <HeroSection />
       <ProblemsSection />
+      <ImpactStatsSection />
       <SampleDashboardsSection />
       <IndustriesSection />
       <DeliverablesSection />

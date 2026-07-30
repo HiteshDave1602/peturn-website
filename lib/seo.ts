@@ -76,6 +76,12 @@ export const pages: PageSeo[] = [
     path: "/contact",
     keywords: ["contact Peturn", "free BI consultation", "dashboard consultation"],
   },
+  {
+    title: "Privacy Policy | Peturn Business Intelligence Consulting",
+    description: "Read Peturn's Privacy Policy to understand what information we collect, how it is used, and how we protect your business data.",
+    path: "/privacy-policy",
+    keywords: ["Peturn privacy policy", "data privacy", "BI consulting privacy"],
+  },
 ];
 
 export function getPageSeo(path: string) {

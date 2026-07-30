@@ -21,8 +21,8 @@ export const contact = {
   usPhone: "+1 732 801 1981",
   indiaTel: "+918469349930",
   usTel: "+17328011981",
-  indiaWhatsApp: "https://wa.me/918469349930",
-  usWhatsApp: "https://wa.me/17328011981",
+  indiaWhatsApp: "https://wa.me/918469349930?text=Hi%20Peturn%2C%20I'd%20like%20to%20book%20a%20free%20consultation.",
+  usWhatsApp: "https://wa.me/17328011981?text=Hi%20Peturn%2C%20I'd%20like%20to%20book%20a%20free%20consultation.",
 } as const;
 
 export const socialLinks = {

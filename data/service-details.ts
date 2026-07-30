@@ -9,25 +9,6 @@ export type ServiceDetail = {
 
 export const serviceDetails: readonly ServiceDetail[] = [
   {
-    id: "business-intelligence",
-    icon: 0,
-    title: "Business Intelligence Consulting",
-    description: "Centralize your business data into one intelligent platform for better visibility and faster decision-making. We help you connect disparate data sources, define meaningful KPIs, and build a reporting foundation that scales with your business.",
-    capabilities: [
-      "Data source assessment and integration planning",
-      "KPI definition and reporting structure design",
-      "BI platform selection and architecture",
-      "Data modeling and warehouse design",
-      "Executive dashboard development",
-      "Team training and adoption support",
-    ],
-    outcomes: [
-      "Single source of truth for business data",
-      "Faster, more confident decision-making",
-      "Reduced time spent on manual data gathering",
-    ],
-  },
-  {
     id: "dashboard-development",
     icon: 1,
     title: "Interactive Dashboard Development",

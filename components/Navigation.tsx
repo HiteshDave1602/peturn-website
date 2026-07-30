@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { navigation } from "@/data/navigation";
-import { ButtonLink } from "@/components/ui/Button";
+import { WhatsAppOpenButton } from "@/components/Interactive";
 
 export function Navigation({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname();
@@ -21,9 +21,9 @@ export function Navigation({ onNavigate }: { onNavigate?: () => void }) {
           {item.label}
         </Link>
       ))}
-      <ButtonLink href="/contact#start-conversation" onClick={onNavigate}>
+      <WhatsAppOpenButton className="button" onNavigate={onNavigate}>
         Book a Free Consultation
-      </ButtonLink>
+      </WhatsAppOpenButton>
     </nav>
   );
 }

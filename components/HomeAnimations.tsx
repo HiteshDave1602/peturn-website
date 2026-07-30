@@ -1,7 +1,7 @@
 "use client";
 import Image, { type ImageProps } from "next/image";
 import { type ReactNode, useEffect, useId, useRef, useState } from "react";
-import { motion, useReducedMotion } from "motion/react";
+import { animate, motion, useReducedMotion } from "motion/react";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -150,6 +150,24 @@ export function BlurUp({ children, className }: { children: ReactNode; className
       {children}
     </motion.div>
   );
+}
+
+export function CountUp({ value, decimals = 0, duration = 1.6 }: { value: number; decimals?: number; duration?: number }) {
+  const prefersReduced = useReducedMotion();
+  const { ref, inView } = useOnceInView<HTMLSpanElement>(0.5);
+  const [display, setDisplay] = useState((prefersReduced ? value : 0).toFixed(decimals));
+
+  useEffect(() => {
+    if (!inView || prefersReduced) return;
+    const controls = animate(0, value, {
+      duration,
+      ease,
+      onUpdate: (v) => setDisplay(v.toFixed(decimals)),
+    });
+    return () => controls.stop();
+  }, [inView, prefersReduced, value, decimals, duration]);
+
+  return <span ref={ref}>{display}</span>;
 }
 
 export function useOnceInView<T extends HTMLElement>(threshold = 0.3) {
