@@ -17,7 +17,7 @@ const process = [
   ["Business Discovery", "We understand your business, challenges, goals, and reporting requirements."],
   ["Data Collection", "We collect data from Excel, ERP systems, accounting software, POS systems, databases, and other business applications."],
   ["Data Preparation", "Our team cleans, validates, and structures your data for accurate analysis."],
-  ["Dashboard Development", "We design customized dashboards tailored to your business objectives."],
+  ["Dashboard Development", "We design customized dashboards tailored to meet your business objectives."],
   ["Review and Optimization", "We review the dashboards with your team and refine them based on feedback."],
   ["Delivery and Support", "We deploy the solution and provide continuous support to ensure long-term success."]
 ];
@@ -55,7 +55,7 @@ export function HeroSection() {
       <div className="hero-copy">
         <HeroSeq index={0}><p className="eyebrow">Business Intelligence &amp; Analytics Consulting</p></HeroSeq>
         <HeroSeq index={1}><h1>Turn business data into decisions leaders can act on.</h1></HeroSeq>
-        <HeroSeq index={2}><p className="lead">Peturn builds practical BI dashboards that connect sales, inventory, procurement, profitability, and executive reporting into one clearer view of your business.</p></HeroSeq>
+        <HeroSeq index={2}><p className="lead">Peturn builds practical BI dashboards which help businesses transform sales, inventory, procurement, financial, and operational data into clear insights that support faster and more confident decisions.</p></HeroSeq>
         <HeroSeq index={3}><p className="hero-statement">Less manual reporting. Sharper visibility. Better business decisions.</p></HeroSeq>
         <HeroSeq index={4}><div className="actions"><a className="button" href="/contact#start-conversation">Book a Free Consultation</a><a className="button secondary" href="#sample-dashboards">Explore Demo Dashboard</a></div></HeroSeq>
       </div>
@@ -246,11 +246,11 @@ export function IllustrativeScenarioSection() {
         </SlideIn>
         <SlideIn as="article" direction="right" delay={0.15} className="scenario-card scenario-after">
           <h3>After</h3>
-          <p className="scenario-label">Dashboard</p>
-          <p>Sales, product margins, stock aging, inventory availability, and category performance are combined into a single reporting view.</p>
+          <p className="scenario-label">Peturn Solution</p>
+          <p>Sales, margins, stock aging, inventory availability, and category performance are organized into one clear, decision-ready reporting view.</p>
         </SlideIn>
       </div>
-      <Reveal><p className="scenario-note"><strong>Decision supported:</strong> Management can identify slow-moving stock, underperforming categories, and items requiring reorder attention.</p></Reveal>
+      <Reveal><p className="scenario-note"><strong>Decision supported:</strong> Management can quickly identify slow-moving stock, underperforming categories, and products requiring reorder attention.</p></Reveal>
       <Reveal><p className="scenario-disclaimer">This is an illustrative example and does not represent a real client engagement.</p></Reveal>
     </div>
   </section>;

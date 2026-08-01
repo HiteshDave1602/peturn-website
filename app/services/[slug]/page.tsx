@@ -6,6 +6,7 @@ import { JsonLd } from "@/components/JsonLd";
 import ScrollReveal from "@/components/ScrollReveal";
 import { Reveal } from "@/components/Reveal";
 import { serviceDetails } from "@/data/service-details";
+import { ServicePreviewDashboard } from "@/components/ServicePreview";
 import { siteName, siteUrl } from "@/lib/seo";
 
 const serviceIcons = [Database, BarChart3, TrendingUp, PackageSearch, Building2, CircleDollarSign, ClipboardCheck];
@@ -72,6 +73,9 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
             </div>
           </Reveal>
           <Reveal delay={0.1}>
+            <ServicePreviewDashboard title={service.title} preview={service.preview} />
+          </Reveal>
+          <Reveal delay={0.15}>
             <div className="service-detail-grid service-page-grid">
               <div>
                 <h3>Capabilities</h3>
@@ -83,7 +87,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
               </div>
             </div>
           </Reveal>
-          <Reveal delay={0.15}>
+          <Reveal delay={0.2}>
             <div className="services-cta">
               <p>Ready to discuss {service.title.toLowerCase()} for your business?</p>
               <a href="/contact#start-conversation" className="button">Book a Free Consultation <ArrowRight size={16} /></a>

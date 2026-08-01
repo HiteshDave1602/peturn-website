@@ -1,6 +1,7 @@
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ServiceCards } from "@/components/ServicesGrid";
+import { PricingSection } from "@/components/PageSections";
 
 export function ServicesPageContent() {
   return (
@@ -25,6 +26,8 @@ export function ServicesPageContent() {
           </Reveal>
         </div>
       </section>
+
+      <PricingSection />
     </>
   );
 }

@@ -1,8 +1,8 @@
 "use client";
-import { useEffect, useId, useState } from "react";
+import { useId, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
-import { animate } from "motion";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { AnimatedMetric } from "@/components/AnimatedMetric";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -13,50 +13,6 @@ const values = {
   Inventory: { metrics: [["Stock Value", "₹12.1L", "-3.1%"], ["Availability", "94.2%", "+1.2%"], ["Slow Moving", "7.8%", "-2.4%"], ["Stock Turns", "6.4x", "+0.7x"]], line: "5,31 48,39 92,35 136,48 180,44 225,59 270,54 315,70" },
   Profitability: { metrics: [["Gross Margin", "34.7%", "+2.8%"], ["Net Profit", "₹5.2L", "+11.3%"], ["Top Category", "Home", "+14.1%"], ["Cost Ratio", "65.3%", "-2.8%"]], line: "5,77 48,68 92,62 136,48 180,51 225,32 270,24 315,14" },
 };
-
-function parseMetric(value: string) {
-  const match = value.match(/^([^\d-]*)(-?[\d,]+(?:\.\d+)?)(.*)$/);
-  if (!match) return null;
-  const [, prefix, numStr, suffix] = match;
-  const num = Number(numStr.replace(/,/g, ""));
-  if (Number.isNaN(num)) return null;
-  const decimals = numStr.includes(".") ? numStr.split(".")[1].length : 0;
-  const hasCommas = numStr.includes(",");
-  return { prefix, num, suffix, decimals, hasCommas };
-}
-
-function formatMetric(num: number, decimals: number, hasCommas: boolean) {
-  return num.toLocaleString("en-US", {
-    minimumFractionDigits: decimals,
-    maximumFractionDigits: decimals,
-    useGrouping: hasCommas,
-  });
-}
-
-function AnimatedMetric({ value }: { value: string }) {
-  const prefersReduced = useReducedMotion();
-  const parsed = parseMetric(value);
-  const [display, setDisplay] = useState(value);
-
-  useEffect(() => {
-    if (!parsed || prefersReduced) {
-      setDisplay(value);
-      return;
-    }
-    setDisplay(`${parsed.prefix}${formatMetric(0, parsed.decimals, parsed.hasCommas)}${parsed.suffix}`);
-    const controls = animate(0, parsed.num, {
-      duration: 0.9,
-      ease,
-      onUpdate: (latest) => {
-        setDisplay(`${parsed.prefix}${formatMetric(latest, parsed.decimals, parsed.hasCommas)}${parsed.suffix}`);
-      },
-    });
-    return () => controls.stop();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [value]);
-
-  return <strong>{display}</strong>;
-}
 
 export function MiniDashboard({ compact = false }: { compact?: boolean }) {
   const uid = `dashboard-${useId().replace(/:/g, "")}`;

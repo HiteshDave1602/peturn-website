@@ -803,7 +803,7 @@ Dashboard:
 Sales, product margins, stock aging, inventory availability, and category performance are combined into a single reporting view.
 
 Decision supported:
-Management can identify slow-moving stock, underperforming categories, and items requiring reorder attention.
+Management can quickly identify slow-moving stock, underperforming categories, and products requiring reorder attention.
 
 Important:
 

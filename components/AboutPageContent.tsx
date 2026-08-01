@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Map, Target, ShieldCheck, CircleCheck, User } from "lucide-react";
+import { Map, Target, ShieldCheck, CircleCheck, ChevronDown } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
 
@@ -20,8 +20,18 @@ const foundersQuestions = [
 ];
 
 const founders = [
-  { name: "Founder Name", role: "Co-Founder & CEO" },
-  { name: "Founder Name", role: "Co-Founder & Head of Analytics" },
+  {
+    name: "Shaishan Patel",
+    role: "Co-Founder – Business Strategy & Client Solutions",
+    bio: "Shaishan brings over seven years of experience in retail operations, business management, marketing, and data-driven decision-making. At Peturn, he leads business strategy, client consultation, solution planning, and the development of analytics solutions focused on practical business outcomes.",
+    image: "/images/shaishan-patel.jpeg",
+  },
+  {
+    name: "Priya Patel",
+    role: "Co-Founder – Analytics & Operations",
+    bio: "Priya brings six years of experience in accounting, financial reporting, data preparation, and manufacturing operations. At Peturn, she leads data validation, KPI development, reporting accuracy, dashboard coordination, and analytics quality control.",
+    image: "/images/priya-patel.jpeg",
+  },
 ];
 
 export function AboutPageContent() {
@@ -110,10 +120,27 @@ export function AboutPageContent() {
           </Reveal>
           <div className="team-grid">
             {founders.map((person, i) => (
-              <Reveal as="article" key={person.role} delay={i * 0.08} className="team-card">
-                <div className="team-avatar" aria-hidden="true"><User/></div>
-                <h3>{person.name}</h3>
-                <p>{person.role}</p>
+              <Reveal as="article" key={person.name} delay={i * 0.08}>
+                <div className="team-card" tabIndex={0}>
+                  <div className="team-photo">
+                    <Image
+                      src={person.image}
+                      alt={person.name}
+                      fill
+                      sizes="(max-width: 768px) 60vw, 260px"
+                      style={{ objectFit: "cover", objectPosition: "top" }}
+                    />
+                  </div>
+                  <div className="team-caption">
+                    <h3>{person.name}</h3>
+                    <p className="team-role">{person.role}</p>
+                    <ChevronDown className="team-toggle" />
+                  </div>
+                  <div className="team-overlay">
+                    <h3>{person.name}</h3>
+                    <p>{person.bio}</p>
+                  </div>
+                </div>
               </Reveal>
             ))}
           </div>
