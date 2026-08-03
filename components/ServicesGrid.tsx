@@ -9,39 +9,39 @@ const ease = [0.22, 1, 0.36, 1] as const;
 
 const serviceIcons = [Database, BarChart3, TrendingUp, PackageSearch, Building2, CircleDollarSign, ClipboardCheck];
 
-const visualThemes = [
-  "linear-gradient(135deg,#1d6cdb 0%,#0b2f8c 100%)",
-  "linear-gradient(135deg,#268dbc 0%,#1d6cdb 100%)",
-  "linear-gradient(135deg,#1f9d6f 0%,#12734f 100%)",
-  "linear-gradient(135deg,#e0a72e 0%,#c8791a 100%)",
-  "linear-gradient(135deg,#7c5cbf 0%,#523e8c 100%)",
-  "linear-gradient(135deg,#d64550 0%,#a3323c 100%)",
+const hexThemes = [
+  "#e0a72e",
+  "#d6631f",
+  "#7c5cbf",
+  "#1d6cdb",
+  "#268dbc",
+  "#1f9d6f",
 ];
 
 export function ServiceCards() {
   const prefersReduced = useReducedMotion();
 
   return (
-    <div className="services-grid" aria-label="Our services">
+    <div className="hex-timeline" aria-label="Our services">
       {serviceDetails.map((service, i) => {
         const Icon = serviceIcons[service.icon];
+        const color = hexThemes[i % hexThemes.length];
         return (
           <motion.div
             key={service.id}
+            className={`hex-col${i % 2 === 1 ? " down" : ""}`}
             initial={prefersReduced ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.25 }}
             transition={{ duration: 0.5, delay: prefersReduced ? 0 : (i % 3) * 0.08, ease }}
           >
-            <Link href={`/services/${service.id}`} className="svc-card" aria-label={`View ${service.title} details`}>
-              <div className="svc-visual" style={{ background: visualThemes[i % visualThemes.length] }}>
+            <Link href={`/services/${service.id}`} aria-label={`View ${service.title} details`} className="hex-link-wrap">
+              <span className="hex-shape" style={{ background: color, color }}>
                 <Icon />
-              </div>
-              <div className="svc-body">
-                <h3>{service.title}</h3>
-                <p>{service.description}</p>
-                <span className="svc-link">View Service <ArrowRight size={15} /></span>
-              </div>
+              </span>
+              <h3>{service.title}</h3>
+              <p>{service.description}</p>
+              <span className="hex-link">View Service <ArrowRight size={14} /></span>
             </Link>
           </motion.div>
         );

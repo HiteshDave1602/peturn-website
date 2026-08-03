@@ -1,6 +1,6 @@
 "use client";
 import { useId, useMemo, useState } from "react";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowDownRight, ArrowUpRight } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import type { ServicePreview } from "@/data/service-details";
 import { AnimatedMetric } from "@/components/AnimatedMetric";
@@ -34,9 +34,7 @@ const VIEWBOX_H = 100 + CHART_BOTTOM_MARGIN;
 const toLeftPct = (x: number) => ((x - VIEWBOX_X) / VIEWBOX_W) * 100;
 const toTopPct = (y: number) => (y / VIEWBOX_H) * 100;
 
-export function ServicePreviewDashboard({ title, preview }: { title: string; preview: ServicePreview }) {
-  const uid = `svc-dash-${useId().replace(/:/g, "")}`;
-  const prefersReduced = useReducedMotion();
+export function DashboardBody({ uid, title, preview, prefersReduced }: { uid: string; title: string; preview: ServicePreview; prefersReduced: boolean | null }) {
   const [activePoint, setActivePoint] = useState<number | null>(null);
   const [activeBar, setActiveBar] = useState<number | null>(null);
   const [activeSlice, setActiveSlice] = useState<number | null>(null);
@@ -88,29 +86,20 @@ export function ServicePreviewDashboard({ title, preview }: { title: string; pre
   const active = activePoint !== null ? points[activePoint] : null;
 
   return (
-    <motion.div
-      className="dashboard service-preview-dashboard"
-      initial={prefersReduced ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.96 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.6, ease }}
-    >
-      <div className="dash-head">
-        <div>
-          <span className="demo">Demo Data Preview</span>
-          <h3>{title} Dashboard</h3>
-          <p>Sample metrics shown for layout and reporting context.</p>
-        </div>
-        <span className="live"><i /> Demo refresh</span>
-      </div>
+    <>
       <div className="metrics">
-        {preview.metrics.map(([label, value, change]) => (
-          <div className="metric" key={label}>
-            <span>{label}</span>
-            <AnimatedMetric value={value} />
-            <small><ArrowUpRight size={12} /> {change}</small>
-          </div>
-        ))}
+        {preview.metrics.map(([label, value, change]) => {
+          const isNegative = change.trim().startsWith("-");
+          return (
+            <div className="metric" key={label}>
+              <span>{label}</span>
+              <AnimatedMetric value={value} />
+              <small className={isNegative ? "negative" : ""}>
+                {isNegative ? <ArrowDownRight size={12} /> : <ArrowUpRight size={12} />} {change}
+              </small>
+            </div>
+          );
+        })}
       </div>
       <div className="chart-row">
         <div className="line-chart">
@@ -261,6 +250,31 @@ export function ServicePreviewDashboard({ title, preview }: { title: string; pre
           </ul>
         </div>
       </div>
+    </>
+  );
+}
+
+export function ServicePreviewDashboard({ title, preview }: { title: string; preview: ServicePreview }) {
+  const uid = `svc-dash-${useId().replace(/:/g, "")}`;
+  const prefersReduced = useReducedMotion();
+
+  return (
+    <motion.div
+      className="dashboard service-preview-dashboard"
+      initial={prefersReduced ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.96 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.6, ease }}
+    >
+      <div className="dash-head">
+        <div>
+          <span className="demo">Demo Data Preview</span>
+          <h3>{title} Dashboard</h3>
+          <p>Sample metrics shown for layout and reporting context.</p>
+        </div>
+        <span className="live"><i /> Demo refresh</span>
+      </div>
+      <DashboardBody uid={uid} title={title} preview={preview} prefersReduced={prefersReduced} />
     </motion.div>
   );
 }
