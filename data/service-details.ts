@@ -3,6 +3,14 @@ export type ServicePreview = {
   readonly line: string;
   readonly barsLabel: string;
   readonly bars: readonly (readonly [string, number])[];
+  readonly mixInsights?: {
+    readonly title: string;
+    readonly topLabel: string;
+    readonly lowestLabel: string;
+    readonly changeLabel: string;
+    readonly change: string;
+    readonly note: string;
+  };
 };
 
 export type ServiceDetail = {
@@ -49,6 +57,14 @@ export const serviceDetails: readonly ServiceDetail[] = [
         ["Inventory", 55],
         ["Financial", 47],
       ],
+      mixInsights: {
+        title: "Dashboard Insights",
+        topLabel: "Top dashboard type",
+        lowestLabel: "Lowest dashboard type",
+        changeLabel: "Adoption change",
+        change: "+8%",
+        note: "Executive dashboards contribute the largest share of total usage.",
+      },
     },
   },
   {
@@ -84,6 +100,14 @@ export const serviceDetails: readonly ServiceDetail[] = [
         ["South", 61],
         ["East", 48],
       ],
+      mixInsights: {
+        title: "Region Insights",
+        topLabel: "Top region",
+        lowestLabel: "Lowest region",
+        changeLabel: "Growth change",
+        change: "+1.8%",
+        note: "West contributes the largest share of total sales.",
+      },
     },
   },
   {
@@ -119,6 +143,14 @@ export const serviceDetails: readonly ServiceDetail[] = [
         ["Apparel", 52],
         ["Home", 39],
       ],
+      mixInsights: {
+        title: "Category Insights",
+        topLabel: "Top category",
+        lowestLabel: "Lowest category",
+        changeLabel: "Availability change",
+        change: "+1.2%",
+        note: "Grocery contributes the largest share of total inventory.",
+      },
     },
   },
   {
@@ -153,6 +185,14 @@ export const serviceDetails: readonly ServiceDetail[] = [
         ["Vendor C", 44],
         ["Vendor D", 33],
       ],
+      mixInsights: {
+        title: "Vendor Insights",
+        topLabel: "Top vendor",
+        lowestLabel: "Lowest vendor",
+        changeLabel: "Cost savings",
+        change: "+9%",
+        note: "Vendor A contributes the largest share of total spend.",
+      },
     },
   },
   {
@@ -187,6 +227,14 @@ export const serviceDetails: readonly ServiceDetail[] = [
         ["Apparel", 47],
         ["Grocery", 36],
       ],
+      mixInsights: {
+        title: "Category Insights",
+        topLabel: "Top category",
+        lowestLabel: "Lowest category",
+        changeLabel: "Profit change",
+        change: "+11.3%",
+        note: "Home contributes the largest share of total margin.",
+      },
     },
   },
   {
@@ -222,6 +270,14 @@ export const serviceDetails: readonly ServiceDetail[] = [
         ["Risk Flag", 52],
         ["Board Deck", 44],
       ],
+      mixInsights: {
+        title: "Report Insights",
+        topLabel: "Top report type",
+        lowestLabel: "Lowest report type",
+        changeLabel: "Delivery change",
+        change: "+3%",
+        note: "Monthly summary reports contribute the largest share of total output.",
+      },
     },
   },
 ] as const;

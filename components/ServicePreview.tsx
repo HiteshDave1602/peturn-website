@@ -83,6 +83,11 @@ export function DashboardBody({ uid, title, preview, prefersReduced }: { uid: st
     [donutSegments]
   );
 
+  const trailingSlice = useMemo(
+    () => donutSegments.reduce((min, seg) => (seg.share < min.share ? seg : min), donutSegments[0]),
+    [donutSegments]
+  );
+
   const active = activePoint !== null ? points[activePoint] : null;
 
   return (
@@ -199,55 +204,77 @@ export function DashboardBody({ uid, title, preview, prefersReduced }: { uid: st
       <div className="donut-panel">
         <div className="chart-title"><span>{preview.barsLabel} mix</span><b>Share of total</b></div>
         <div className="donut-body">
-          <div className="donut-wrap">
-            <svg viewBox="0 0 42 42" role="img" aria-label={`${title} category mix`}>
-              <g transform="rotate(-90 21 21)">
-                <circle cx="21" cy="21" r={DONUT_R} fill="transparent" stroke="var(--border)" strokeWidth="6" />
-                {donutSegments.map((seg, i) => {
-                  const segLength = Math.max(seg.share / 100 - 0.012, 0);
-                  return (
-                    <motion.circle
-                      key={seg.label}
-                      cx="21"
-                      cy="21"
-                      r={DONUT_R}
-                      fill="transparent"
-                      stroke={seg.color}
-                      strokeWidth={activeSlice === i ? 8 : 6}
-                      strokeLinecap="butt"
-                      style={{ transition: "stroke-width .15s ease" }}
-                      initial={prefersReduced ? { pathLength: segLength, pathOffset: seg.offset } : { pathLength: 0, pathOffset: seg.offset }}
-                      whileInView={{ pathLength: segLength, pathOffset: seg.offset }}
-                      viewport={{ once: true, amount: 0.4 }}
-                      transition={{ duration: 0.7, delay: prefersReduced ? 0 : 0.2 + i * 0.12, ease }}
-                    />
-                  );
-                })}
-              </g>
-            </svg>
-            <div className="donut-center">
-              <strong>{Math.round(leadingSlice.share)}%</strong>
-              <span>{leadingSlice.label}</span>
+          <div className="donut-primary">
+            <div className="donut-wrap">
+              <svg viewBox="0 0 42 42" role="img" aria-label={`${title} category mix`}>
+                <g transform="rotate(-90 21 21)">
+                  <circle cx="21" cy="21" r={DONUT_R} fill="transparent" stroke="var(--border)" strokeWidth="6" />
+                  {donutSegments.map((seg, i) => {
+                    const segLength = Math.max(seg.share / 100 - 0.012, 0);
+                    return (
+                      <motion.circle
+                        key={seg.label}
+                        cx="21"
+                        cy="21"
+                        r={DONUT_R}
+                        fill="transparent"
+                        stroke={seg.color}
+                        strokeWidth={activeSlice === i ? 8 : 6}
+                        strokeLinecap="butt"
+                        style={{ transition: "stroke-width .15s ease" }}
+                        initial={prefersReduced ? { pathLength: segLength, pathOffset: seg.offset } : { pathLength: 0, pathOffset: seg.offset }}
+                        whileInView={{ pathLength: segLength, pathOffset: seg.offset }}
+                        viewport={{ once: true, amount: 0.4 }}
+                        transition={{ duration: 0.7, delay: prefersReduced ? 0 : 0.2 + i * 0.12, ease }}
+                      />
+                    );
+                  })}
+                </g>
+              </svg>
+              <div className="donut-center">
+                <strong>{Math.round(leadingSlice.share)}%</strong>
+                <span>{leadingSlice.label}</span>
+              </div>
             </div>
+            <ul className="donut-legend">
+              {donutSegments.map((seg, i) => (
+                <li key={seg.label}>
+                  <button
+                    type="button"
+                    className={`donut-legend-item ${activeSlice === i ? "active" : ""}`}
+                    onPointerEnter={() => setActiveSlice(i)}
+                    onPointerLeave={() => setActiveSlice((cur) => (cur === i ? null : cur))}
+                    onFocus={() => setActiveSlice(i)}
+                    onBlur={() => setActiveSlice((cur) => (cur === i ? null : cur))}
+                  >
+                    <i style={{ background: seg.color }} />
+                    <span>{seg.label}</span>
+                    <b>{Math.round(seg.share)}%</b>
+                  </button>
+                </li>
+              ))}
+            </ul>
           </div>
-          <ul className="donut-legend">
-            {donutSegments.map((seg, i) => (
-              <li key={seg.label}>
-                <button
-                  type="button"
-                  className={`donut-legend-item ${activeSlice === i ? "active" : ""}`}
-                  onPointerEnter={() => setActiveSlice(i)}
-                  onPointerLeave={() => setActiveSlice((cur) => (cur === i ? null : cur))}
-                  onFocus={() => setActiveSlice(i)}
-                  onBlur={() => setActiveSlice((cur) => (cur === i ? null : cur))}
-                >
-                  <i style={{ background: seg.color }} />
-                  <span>{seg.label}</span>
-                  <b>{Math.round(seg.share)}%</b>
-                </button>
-              </li>
-            ))}
-          </ul>
+          {preview.mixInsights && (
+            <div className="donut-insights">
+              <div className="donut-insights-title">{preview.mixInsights.title}</div>
+              <dl>
+                <div className="donut-insight-row">
+                  <dt><ArrowUpRight size={12} /> {preview.mixInsights.topLabel}</dt>
+                  <dd>{leadingSlice.label} — {Math.round(leadingSlice.share)}%</dd>
+                </div>
+                <div className="donut-insight-row">
+                  <dt><ArrowDownRight size={12} /> {preview.mixInsights.lowestLabel}</dt>
+                  <dd>{trailingSlice.label} — {Math.round(trailingSlice.share)}%</dd>
+                </div>
+                <div className="donut-insight-row">
+                  <dt>{preview.mixInsights.changeLabel}</dt>
+                  <dd className="donut-insight-positive"><ArrowUpRight size={12} /> {preview.mixInsights.change}</dd>
+                </div>
+              </dl>
+              <p className="donut-insights-note">{preview.mixInsights.note}</p>
+            </div>
+          )}
         </div>
       </div>
     </>

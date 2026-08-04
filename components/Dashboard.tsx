@@ -13,6 +13,14 @@ const values: Record<(typeof tabs)[number], ServicePreview> = {
     line: "5,78 48,65 92,72 136,42 180,50 225,27 270,35 315,12",
     barsLabel: "By department",
     bars: [["Sales", 82], ["Operations", 68], ["Marketing", 55], ["Finance", 47]],
+    mixInsights: {
+      title: "Department Insights",
+      topLabel: "Top department",
+      lowestLabel: "Lowest department",
+      changeLabel: "MoM change",
+      change: "+8.4%",
+      note: "Sales contributes the largest share of total performance.",
+    },
   },
   Sales: {
     metrics: [["Revenue", "₹18.6L", "+9.8%"], ["Orders", "2,481", "+7.2%"], ["Average Value", "₹749", "+3.4%"], ["Monthly Growth", "9.8%", "+1.8%"]],
