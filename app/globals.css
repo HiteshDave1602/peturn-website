@@ -1890,13 +1890,62 @@ footer{
   margin-top:76px;
 }
 
+.hex-col:hover,
+.hex-col:focus-within{
+  z-index:5;
+}
+
 .hex-link-wrap{
+  position:relative;
+  z-index:1;
   display:flex;
   flex-direction:column;
   align-items:center;
   text-align:center;
   color:inherit;
   width:100%;
+  cursor:pointer;
+  transition:transform .35s cubic-bezier(.22,1,.36,1);
+}
+
+.hex-link-wrap:before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  inset:-16px -14px -20px;
+  border-radius:22px;
+  background:#fff;
+  border:1px solid transparent;
+  opacity:0;
+  transform:scale(.94);
+  box-shadow:0 22px 44px -16px rgba(6,20,51,.2),0 0 0 1px rgba(var(--accent-rgb,29 108 219),.14),0 16px 36px -12px rgba(var(--accent-rgb,29 108 219),.4);
+  transition:opacity .35s cubic-bezier(.22,1,.36,1),transform .35s cubic-bezier(.22,1,.36,1),border-color .35s ease;
+}
+
+.hex-link-wrap:hover,
+.hex-link-wrap:focus-visible{
+  transform:translateY(-8px);
+}
+
+.hex-link-wrap:hover:before,
+.hex-link-wrap:focus-visible:before{
+  opacity:1;
+  transform:scale(1);
+  border-color:rgba(var(--accent-rgb,29 108 219),.5);
+}
+
+.hex-link-wrap:focus-visible{
+  outline:none;
+}
+
+@media(hover:none){
+  .hex-link-wrap:hover{
+    transform:none;
+  }
+  .hex-link-wrap:hover:before{
+    opacity:0;
+    transform:scale(.94);
+  }
 }
 
 .hex-shape{
@@ -1908,7 +1957,7 @@ footer{
   place-items:center;
   clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
   box-shadow:0 12px 28px rgba(6,20,51,.14);
-  transition:transform .3s cubic-bezier(.22,1,.36,1);
+  transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s cubic-bezier(.22,1,.36,1);
 }
 
 .hex-shape:before{
@@ -1930,12 +1979,19 @@ footer{
 
 .hex-link-wrap:hover .hex-shape,
 .hex-link-wrap:focus-visible .hex-shape{
-  transform:translateY(-5px) scale(1.04);
+  transform:scale(1.06);
+  box-shadow:0 14px 32px -4px rgba(var(--accent-rgb,29 108 219),.5);
 }
 
 .hex-col h3{
   margin:22px 0 8px;
   font-size:.95rem;
+  transition:color .3s ease;
+}
+
+.hex-link-wrap:hover h3,
+.hex-link-wrap:focus-visible h3{
+  color:rgb(var(--accent-rgb,29 108 219));
 }
 
 .hex-col p{
@@ -1947,22 +2003,6 @@ footer{
   line-clamp:3;
   -webkit-box-orient:vertical;
   overflow:hidden;
-}
-
-.hex-link{
-  display:inline-flex;
-  align-items:center;
-  gap:5px;
-  margin-top:auto;
-  color:var(--blue);
-  font-size:.8rem;
-  font-weight:700;
-  transition:gap .2s ease;
-}
-
-.hex-link-wrap:hover .hex-link,
-.hex-link-wrap:focus-visible .hex-link{
-  gap:9px;
 }
 
 @media(max-width:1024px){

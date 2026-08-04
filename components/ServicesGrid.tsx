@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
-import { ArrowRight, BarChart3, Building2, CircleDollarSign, ClipboardCheck, Database, PackageSearch, TrendingUp } from "lucide-react";
+import { BarChart3, Building2, CircleDollarSign, ClipboardCheck, Database, PackageSearch, TrendingUp } from "lucide-react";
 import { serviceDetails } from "@/data/service-details";
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -17,6 +17,11 @@ const hexThemes = [
   "#268dbc",
   "#1f9d6f",
 ];
+
+function hexToRgb(hex: string) {
+  const value = parseInt(hex.slice(1), 16);
+  return `${(value >> 16) & 255} ${(value >> 8) & 255} ${value & 255}`;
+}
 
 export function ServiceCards() {
   const prefersReduced = useReducedMotion();
@@ -35,13 +40,17 @@ export function ServiceCards() {
             viewport={{ once: true, amount: 0.25 }}
             transition={{ duration: 0.5, delay: prefersReduced ? 0 : (i % 3) * 0.08, ease }}
           >
-            <Link href={`/services/${service.id}`} aria-label={`View ${service.title} details`} className="hex-link-wrap">
+            <Link
+              href={`/services/${service.id}`}
+              aria-label={`View ${service.title} details`}
+              className="hex-link-wrap"
+              style={{ "--accent": color, "--accent-rgb": hexToRgb(color) } as React.CSSProperties}
+            >
               <span className="hex-shape" style={{ background: color, color }}>
                 <Icon />
               </span>
               <h3>{service.title}</h3>
               <p>{service.description}</p>
-              <span className="hex-link">View Service <ArrowRight size={14} /></span>
             </Link>
           </motion.div>
         );
