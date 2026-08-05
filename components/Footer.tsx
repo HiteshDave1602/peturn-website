@@ -5,7 +5,6 @@ import { navigation } from "@/data/navigation";
 
 const footerNav = [
   ...navigation,
-  { label: "Pricing", href: "/#pricing" },
   { label: "FAQ", href: "/#faq" },
   { label: "Privacy Policy", href: "/privacy-policy" },
 ];

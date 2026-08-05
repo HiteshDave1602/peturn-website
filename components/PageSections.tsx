@@ -186,7 +186,7 @@ export function AboutPreviewSection() {
 export function PricingSection() {
   return <section id="pricing" className="section pricing-section">
     <div className="container"><Reveal><SectionHeading eyebrow="Flexible ways to begin" title="Analytics Solutions for Every Stage of Growth"/></Reveal>
-      <div className="pricing-grid">{pricing.map((plan,i)=><Reveal as="article" key={plan.name} delay={i * 0.1} id={`pricing-slide-${i+1}`} className={plan.featured ? "featured" : ""}>{plan.featured&&<span className="popular">Recommended</span>}<h3>{plan.name}</h3><p>{plan.description}</p><strong className="price">{plan.price}</strong><ul>{plan.items.map(x=><li key={x}><Check/>{x}</li>)}</ul><a href="/contact#start-conversation" className={`button ${plan.featured?"":"secondary"}`}>Book a Consultation</a></Reveal>)}</div>
+      <div className="pricing-grid">{pricing.map((plan,i)=><Reveal as="article" key={plan.name} delay={i * 0.1} id={`pricing-slide-${i+1}`} className={plan.featured ? "featured" : ""}>{plan.featured&&<span className="popular">Recommended</span>}<h3>{plan.name}</h3><p>{plan.description}</p><ul>{plan.items.map(x=><li key={x}><Check/>{x}</li>)}</ul><a href="/contact#start-conversation" className={`button ${plan.featured?"":"secondary"}`}>Book a Consultation</a></Reveal>)}</div>
       <Reveal><p className="pricing-note">Final pricing depends on data sources, dashboard complexity, reporting frequency, integrations, and project scope.</p></Reveal>
     </div>
   </section>;

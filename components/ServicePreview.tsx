@@ -69,13 +69,13 @@ export function DashboardBody({ uid, title, preview, prefersReduced }: { uid: st
 
   const donutSegments = useMemo(() => {
     const total = preview.bars.reduce((sum, [, pct]) => sum + pct, 0) || 1;
-    let cumulative = 0;
-    return preview.bars.map(([label, pct], i) => {
+    return preview.bars.reduce<{ label: string; pct: number; share: number; offset: number; color: string }[]>((acc, [label, pct], i) => {
       const share = (pct / total) * 100;
-      const segment = { label, pct, share, offset: cumulative / 100, color: donutColors[i % donutColors.length] };
-      cumulative += share;
-      return segment;
-    });
+      const prev = acc[i - 1];
+      const offset = prev ? prev.offset + prev.share / 100 : 0;
+      acc.push({ label, pct, share, offset, color: donutColors[i % donutColors.length] });
+      return acc;
+    }, []);
   }, [preview.bars]);
 
   const leadingSlice = useMemo(

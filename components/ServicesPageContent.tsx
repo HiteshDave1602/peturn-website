@@ -1,12 +1,13 @@
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
-import { ServiceCards } from "@/components/ServicesGrid";
+import { ServicesShowcase } from "@/components/ServicesShowcase";
 import { PricingSection } from "@/components/PageSections";
 
 export function ServicesPageContent() {
   return (
     <>
-      <section className="section">
+      <section className="section services-what-section">
+        <div className="services-what-grid-bg" aria-hidden="true" />
         <div className="container">
           <Reveal>
             <SectionHeading
@@ -16,7 +17,7 @@ export function ServicesPageContent() {
             />
           </Reveal>
 
-          <ServiceCards />
+          <ServicesShowcase />
 
           <Reveal>
             <div className="services-cta">
