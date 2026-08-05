@@ -1,6 +1,6 @@
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
-import { ServicesShowcase } from "@/components/ServicesShowcase";
+import { ServiceCards } from "@/components/ServicesGrid";
 import { PricingSection } from "@/components/PageSections";
 
 export function ServicesPageContent() {
@@ -17,7 +17,7 @@ export function ServicesPageContent() {
             />
           </Reveal>
 
-          <ServicesShowcase />
+          <ServiceCards />
 
           <Reveal>
             <div className="services-cta">
