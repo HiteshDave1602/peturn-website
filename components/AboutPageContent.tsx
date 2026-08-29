@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Map, Target, ShieldCheck, CircleCheck, ChevronDown } from "lucide-react";
+import { Map, Target, ShieldCheck, CircleCheck } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
 
@@ -20,12 +20,6 @@ const foundersQuestions = [
 ];
 
 const founders = [
-  {
-    name: "Shaishan Patel",
-    role: "Co-Founder – Business Strategy & Client Solutions",
-    bio: "Shaishan brings over seven years of experience in retail operations, business management, marketing, and data-driven decision-making. At Peturn, he leads business strategy, client consultation, solution planning, and the development of analytics solutions focused on practical business outcomes.",
-    image: "/images/shaishan-patel.jpeg",
-  },
   {
     name: "Priya Patel",
     role: "Co-Founder – Analytics & Operations",
@@ -131,14 +125,10 @@ export function AboutPageContent() {
                       style={{ objectFit: "cover", objectPosition: "top" }}
                     />
                   </div>
-                  <div className="team-caption">
+                  <div className="team-info">
                     <h3>{person.name}</h3>
-                    <p className="team-role">{person.role}</p>
-                    <ChevronDown className="team-toggle" />
-                  </div>
-                  <div className="team-overlay">
-                    <h3>{person.name}</h3>
-                    <p>{person.bio}</p>
+                    {person.role && <p className="team-role">{person.role}</p>}
+                    {person.bio && <p className="team-bio">{person.bio}</p>}
                   </div>
                 </div>
               </Reveal>
