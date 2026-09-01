@@ -22,7 +22,7 @@ const foundersQuestions = [
 const founders = [
   {
     name: "Priya Patel",
-    role: "Co-Founder – Analytics & Operations",
+    role: "Founder – Analytics & Operations",
     bio: "Priya brings six years of experience in accounting, financial reporting, data preparation, and manufacturing operations. At Peturn, she leads data validation, KPI development, reporting accuracy, dashboard coordination, and analytics quality control.",
     image: "/images/priya-patel.jpeg",
   },
@@ -81,7 +81,7 @@ export function AboutPageContent() {
       <section className="section">
         <div className="container founders-note-grid">
           <Reveal>
-            <p className="eyebrow">Co-Founders&apos; Note</p>
+            <p className="eyebrow">Founder&apos;s Note</p>
             <h2>Why We Built Peturn</h2>
             <div className="about-copy">
               <p>Business decisions today move faster than ever, but most companies still run on spreadsheets, static reports, and gut feel. When we started Peturn, we saw retail and manufacturing businesses struggling with data scattered across systems, reports that took days to prepare, and dashboards that were either too generic or too expensive to build. We built Peturn to change that.</p>
@@ -98,7 +98,7 @@ export function AboutPageContent() {
             </div>
           </Reveal>
           <Reveal delay={0.1} as="div" className="founders-note-visual">
-            <Image src="/images/Co-Founders' Note.jpg" alt="Peturn co-founders" fill sizes="(max-width: 768px) 100vw, 50vw" style={{ objectFit: "cover" }} />
+            <Image src="/images/Co-Founders' Note.jpg" alt="Peturn founder" fill sizes="(max-width: 768px) 100vw, 50vw" style={{ objectFit: "cover" }} />
           </Reveal>
         </div>
       </section>
@@ -108,8 +108,8 @@ export function AboutPageContent() {
           <Reveal>
             <SectionHeading
               eyebrow="The people behind Peturn"
-              title="Meet the Founders"
-              text="The team leading Peturn's mission to make Business Intelligence simple, practical, and accessible."
+              title="Meet the Founder"
+              text="The founder leading Peturn's mission to make Business Intelligence simple, practical, and accessible."
             />
           </Reveal>
           <div className="team-grid">
